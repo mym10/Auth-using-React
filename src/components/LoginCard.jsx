@@ -13,22 +13,25 @@ function LoginCard({toggleAuthPage}) {
         e.preventDefault();
         if(username === cred.username && password === cred.password) {
             toast.success("Successful login");
-            setTimeout(() => navigate("/secret"), 1000);
+            setTimeout(() => navigate("/home"), 500);
         }else {
             toast.error("Login failed");
         }
     }
 
     return (
-        <div className="card">
-            <div className="form">
-                <p>Do not have an account? <span className="toggle-link" onClick={toggleAuthPage}>Sign Up here.</span></p>
-                <input type="text" placeholder="Username" className="input" id="username" value={username} onChange={(e) => setUsername(e.target.value)}/>
-                <input type="password" placeholder="Password" className="input" id="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-                <a href="#" className="link">Forgot Password?</a>
-                <button className="button" onClick={handleSubmit}>LOGIN</button>
+        <div>
+            
+            <div className="card">
+                <div className="form">
+                    <p>Do not have an account? <span className="toggle-link" onClick={toggleAuthPage}>Sign Up here.</span></p>
+                    <input type="text" placeholder="Username" className="input" id="username" value={username} onChange={(e) => setUsername(e.target.value)}/>
+                    <input type="password" placeholder="Password" className="input" id="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    <a href="#" className="link">Forgot Password?</a>
+                    <button className="button" onClick={handleSubmit}>LOGIN</button>
+                </div>
+                <ToastContainer />
             </div>
-            <ToastContainer />
         </div>
     );
 }

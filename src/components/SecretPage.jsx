@@ -9,3 +9,8 @@ const SecretPage = () => {
 };
 
 export default SecretPage;
+
+// multi screen app layout (home, about, contact)
+//navigation using react router
+//use libraries MUI and react icons.
+//resuable buttons, cards models.
