@@ -14,6 +14,7 @@ const CustomModal = ({open, onClose, title, children}) => {
                 boxShadow: 24,
                 p: 4,
                 borderRadius: 2,
+                color: 'black',
             }}>
                 <Typography variant="h6" component="h2" sx={{ mb: 2 }}> {title}</Typography>
                 {children}

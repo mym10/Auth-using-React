@@ -4,6 +4,7 @@ import movies from '../movies.json';
 import MovieModal from '../components2/MovieModal';
 import { IoChevronForwardSharp } from "react-icons/io5";
 
+
 const Home = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedMovie, setSelectedMovie] = useState(null);
@@ -27,6 +28,15 @@ const Home = () => {
         return shuffledArray;
       };
     //-------------------------- 
+    //drop down
+    const [selectedGenre, setSelectedGenre] = useState("Select Genre");
+
+    const genres = ["Action","Comedy","Drama","Horror","Romance","Sci-Fi","Thriller","Fantasy","Animation","Documentary"];
+
+    const handleGenreChange = (event) => {
+        setSelectedGenre(event.target.value);
+    };
+
     return (
         <div className='home-page'>
             <div className="home-page-video">
@@ -39,6 +49,20 @@ const Home = () => {
                 </iframe>
             </div>
             <div className="home-page-content">
+                <div className="dropdown-container">
+                    <select
+                        className="dropdown"
+                        value={selectedGenre}
+                        onChange={handleGenreChange}
+                    >
+                        <option disabled>Select Genre</option>
+                        {genres.map((genre, index) => (
+                        <option key={index} value={genre}>
+                            {genre}
+                        </option>
+                        ))}
+                    </select>
+                </div>
                 <div className='bar-title'>
                 <h2>Watched Movies</h2><IoChevronForwardSharp size={35} style={{ color: 'lightgray' }}/>
                 </div>

@@ -24,9 +24,9 @@ const MovieModal = ({
                     boxShadow: 24,
                     p: 4,
                     borderRadius: 2,
-                    display: 'flex', // Flexbox to layout image and details side by side
-                    flexDirection: 'row', // Align items horizontally
-                    gap: 2, // Space between image and details
+                    display: 'flex', 
+                    flexDirection: 'row', 
+                    gap: 2, 
                 }}
             >
                 <Box sx={{ flexBasis: '30%' }}>

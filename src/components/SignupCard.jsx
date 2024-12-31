@@ -21,14 +21,13 @@ function SignupCard({toggleAuthPage}) {
     });
 
     useEffect(() => {
-        //save cred to localStorage whenever it changes
         localStorage.setItem("cred", JSON.stringify(cred));
     }, [cred]);
 
     //string password regex
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-    // Function to check password strength
+    //check password strength
     const checkPwdStrength = (password) => {
         if (passwordRegex.test(password)) {
             setPwdStrength("Strong");

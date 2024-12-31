@@ -5,10 +5,10 @@ import SignupCard from "./SignupCard";
 import Home from "./Home";
 import Contact from "./Contact";
 import About from "./About";
-import NavBar from "../components2/NavBar"
 import { Link } from 'react-router-dom';
-import { IoFilm} from "react-icons/io5";
+import { IoFilm } from "react-icons/io5";
 import popbg from '../assets/popbg.jpg';
+import NavBar from '../components2/NavBar'
 
 const App = () => {
   const [isLogin, setIsLogin] = useState(true);

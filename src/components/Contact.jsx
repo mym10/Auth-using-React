@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import CustomCard from '../components2/CustomCard';
 import CustomModal from '../components2/CustomModal';
 import { BsTwitter, BsFacebook, BsInstagram, BsGoogle } from "react-icons/bs";
+import NewsletterModal from '../components2/NewsletterModal';
 
 const Contact = () => {
-    const [modalOpen, setModalOpen] = useState(false);
-    const handleModalToggle = () => setModalOpen(!modalOpen);
+    const [activeModal, setActiveModal] = useState(null);
+    const handleModalToggle = (modalName) => {
+        setActiveModal(activeModal === modalName ? null : modalName);
+    };
 
     return (
         <div className='contact-page'>
@@ -15,15 +18,17 @@ const Contact = () => {
                     title="Get in touch"
                     description=""
                     actionText="Send"
-                    onAction={handleModalToggle}
+                    onAction={() => handleModalToggle('CustomModal')}
                 />
-                <CustomModal
-                    open={modalOpen}
-                    onClose={handleModalToggle}
-                    title="Thanks for talking to us!"
-                >
-                    <p>You'll receive a reply soon.</p>
-                </CustomModal>
+                {activeModal === 'CustomModal' && (
+                    <CustomModal
+                        open={true}
+                        onClose={() => handleModalToggle('CustomModal')}
+                        title="Thanks for talking to us!"
+                    >
+                        <p>You'll receive a reply soon.</p>
+                    </CustomModal>
+                )}
                 <div className='contact-icons'>
                     <BsTwitter size={30}/>
                     <BsFacebook size={30}/>
@@ -31,6 +36,13 @@ const Contact = () => {
                     <BsGoogle size={30}/>
                 </div>
             </div>
+            <p className='subscribe' onClick={() => handleModalToggle('NewsletterModal')}>Subscribe to our newsletter!</p>
+            {activeModal === 'NewsletterModal' && (
+                <NewsletterModal
+                open = {true}
+                onClose={() => handleModalToggle('NewsletterModal')}
+                ></NewsletterModal>
+            )}
         </div>
     );
 };

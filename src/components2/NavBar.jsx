@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
-import { IoSearch, IoFilm} from "react-icons/io5";
+import { IoSearch, IoFilm, IoSunny, IoMoon} from "react-icons/io5";
 
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -8,12 +8,12 @@ const Navbar = () => {
     setSearchQuery(e.target.value);
   };
   return (
-    <nav className="bg-gray-800 text-white">
+    <nav className={`bg-gray-800 text-white navbar ${isDarkTheme ? "dark-theme" : "light-theme"}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <Link to="/" className="text-xl font-bold text-white flex items-center" style={{ gap: '8px' }}>
-            <IoFilm size={30} style={{ color: 'white' }}/>
+            <Link to="/" className="text-xl font-bold flex items-center title" style={{ gap: '8px' }}>
+            <IoFilm size={30} className='icon'/>
               TAKETWO
             </Link>
           </div>

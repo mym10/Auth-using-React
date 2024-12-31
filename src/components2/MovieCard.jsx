@@ -4,8 +4,8 @@ import { IoAddCircle, IoCaretForwardCircle, IoHeartCircle } from "react-icons/io
 
 const MovieCard = ({movieImage, movieTitle, actionText, onAction}) => {
     return (
-        <Card sx={{ width: 350, boxShadow: 3, borderRadius: 2, backgroundColor: 'transparent', overflow: 'visible', }}>
-            <CardContent sx={{padding: 0}}>
+        <Card sx={{ width: 350, borderRadius: 2, backgroundColor: 'transparent', overflow: 'visible'}}>
+            <CardContent sx={{ "&:last-child": { padding: 0} }}>
                 <div className="movie-container">
                     <img src={movieImage} alt={movieTitle} />
                     <Typography variant="h5" component="h3" sx={{ textAlign: 'left', marginTop: '3px', fontFamily: "Poppins", fontWeight: 500, width:'270px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', color: 'lightgray' }}>
