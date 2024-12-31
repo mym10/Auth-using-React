@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { IoFilm } from "react-icons/io5";
 import popbg from '../assets/popbg.jpg';
 import NavBar from '../components2/NavBar'
+import ThemeProvider from '../components2/ThemeContext';
 
 const App = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -30,35 +31,37 @@ const App = () => {
   const showNavbar = location.pathname !== '/'; 
 
   return (
-    <div className={`${location.pathname === '/' ? 'app-container-login ' : 'app-container-home'}`} style={{background: location.pathname === '/' ? `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${popbg})` : 'none', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-      {showNavbar && <NavBar />} 
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Link
-                to="/"
-                className="text-4xl font-bold text-white flex items-center"
-                style={{ gap: '8px', marginBottom: '16px' }} 
-              >
-                <IoFilm size={40} style={{ color: 'white' }} />
-                TAKETWO
-              </Link>
-              <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
-              {isLogin ? (
-                <LoginCard toggleAuthPage={toggleAuthPage} />
-              ) : (
-                <SignupCard toggleAuthPage={toggleAuthPage} />
-              )}
-            </>
-          }
-        />
-        <Route path="/home" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
-    </div>
+    <ThemeProvider>
+      <div className={`${location.pathname === '/' ? 'app-container-login ' : 'app-container-home'}`} style={{background: location.pathname === '/' ? `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${popbg})` : 'none', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        {showNavbar && <NavBar />} 
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Link
+                  to="/"
+                  className="text-4xl font-bold text-white flex items-center"
+                  style={{ gap: '8px', marginBottom: '16px' }} 
+                >
+                  <IoFilm size={40} style={{ color: 'white' }} />
+                  TAKETWO
+                </Link>
+                <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
+                {isLogin ? (
+                  <LoginCard toggleAuthPage={toggleAuthPage} />
+                ) : (
+                  <SignupCard toggleAuthPage={toggleAuthPage} />
+                )}
+              </>
+            }
+          />
+          <Route path="/home" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </div>
+    </ThemeProvider>
   );
 };
 

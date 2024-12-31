@@ -1,21 +1,39 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Card, CardContent, CardActions, Typography } from '@mui/material';
 import { IoAddCircle, IoCaretForwardCircle, IoHeartCircle } from "react-icons/io5";
+import { ThemeContext } from './ThemeContext';
 
 const MovieCard = ({movieImage, movieTitle, actionText, onAction}) => {
+    const { theme } = useContext(ThemeContext);
     return (
-        <Card sx={{ width: 350, borderRadius: 2, backgroundColor: 'transparent', overflow: 'visible'}}>
+        <Card sx={{ width: 350, 
+        borderRadius: 2, 
+        // backgroundColor: 'transparent', 
+        backgroundColor: theme === 'light' ? 'white' : '#333',
+        overflow: 'visible',
+        color: theme === 'light' ? '#000' : '#fff' 
+        }}>
             <CardContent sx={{ "&:last-child": { padding: 0} }}>
                 <div className="movie-container">
                     <img src={movieImage} alt={movieTitle} />
-                    <Typography variant="h5" component="h3" sx={{ textAlign: 'left', marginTop: '3px', fontFamily: "Poppins", fontWeight: 500, width:'270px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', color: 'lightgray' }}>
+                    <Typography variant="h5" component="h3" sx={{ 
+                        textAlign: 'left', 
+                        marginTop: '3px', 
+                        fontFamily: "Poppins", 
+                        fontWeight: 500, 
+                        width:'270px', 
+                        whiteSpace: 'nowrap', 
+                        overflow: 'hidden', 
+                        textOverflow: 'ellipsis', 
+                        color: theme === 'light' ? '#333' : 'lightgray'
+                        }}>
                         {movieTitle}
                     </Typography>
                     <div className="movie-container-actions">
                         <div className="left-icons">
-                            <IoCaretForwardCircle size={35} style={{ color: 'lightgray' }} />
-                            <IoAddCircle size={35} style={{ color: 'lightgray' }} />
-                            <IoHeartCircle size={35} style={{ color: 'lightgray' }} />
+                            <IoCaretForwardCircle size={35} style={{ color: theme === 'light' ? '#333' : 'lightgray' }} />
+                            <IoAddCircle size={35} style={{ color: theme === 'light' ? '#333' : 'lightgray' }} />
+                            <IoHeartCircle size={35} style={{ color: theme === 'light' ? '#333' : 'lightgray' }} />
                         </div>
                         <div className="action-text">
                             <CardActions sx={{ justifyContent: 'flex-end' }}>
@@ -27,11 +45,16 @@ const MovieCard = ({movieImage, movieTitle, actionText, onAction}) => {
                                         fontSize: '15px',
                                         cursor: 'pointer',
                                         padding: '5px 10px',
-                                        border: '2px solid white',
+                                        border: `2px solid ${theme === 'light' ? '#333' : 'white'}`,
                                         borderRadius: '4px',
                                         display: 'inline-block',
                                         transition: '0.3s ease',
-                                        '&:hover': { backgroundColor: 'lightgray', color: 'black' }
+                                        backgroundColor: theme === 'light' ? '#f0f0f0' : '#444',
+                                        color: theme === 'light' ? 'black' : 'white',
+                                        '&:hover': { 
+                                            backgroundColor: theme === 'light' ? '#ddd' : 'black', 
+                                            color: theme === 'light' ? 'black' : 'white' 
+                                        }
                                     }} 
                                     onClick={onAction}
                                 >

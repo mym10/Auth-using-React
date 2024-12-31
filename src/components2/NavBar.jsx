@@ -1,12 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { IoSearch, IoFilm, IoSunny, IoMoon} from "react-icons/io5";
+import { ThemeContext } from './ThemeContext';
 
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
+
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
   return (
     <nav className='bg-gray-800 text-white'>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -24,25 +28,32 @@ const Navbar = () => {
               value={searchQuery}
               onChange={handleSearchChange}
               placeholder="Search..."
-              className="bg-gray-700 text-white rounded-md py-2 px-4 w-1/2 focus:outline-none focus:ring-2 focus:ring-gray-500"
+              className={`${theme === 'dark'? 'bg-gray-700 text-white focus:ring-gray-500' : 'bg-gray-400 text-black focus:ring-gray-500'} rounded-md py-2 px-4 w-1/2 focus:outline-none focus:ring-2 `}
             />
           </div>
-          <div className="hidden md:flex space-x-4">
+          <div className="hidden md:flex space-x-4" style={{ alignItems: 'center'}}>
+            <div onClick={toggleTheme} style={{ cursor: 'pointer' }}>
+              {theme === 'light' ? (
+                <IoMoon size={24} style={{ color: 'black' }} />
+              ) : (
+                <IoSunny size={24} style={{ color: 'white' }} />
+              )}
+            </div>
             <Link
               to="/home"
-              className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
+              className={`px-3 py-2 rounded-md text-sm font-medium ${theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-gray-300'}`}
             >
               Home
             </Link>
             <Link
               to="/about"
-              className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
+              className={`px-3 py-2 rounded-md text-sm font-medium ${theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-gray-300'}`}
             >
               About
             </Link>
             <Link
               to="/contact"
-              className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
+              className={`px-3 py-2 rounded-md text-sm font-medium ${theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-gray-300'}`}
             >
               Contact
             </Link>
