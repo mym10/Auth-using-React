@@ -13,6 +13,16 @@ body {
   overflow-x: hidden;
 }
 
+body.light-theme {
+  background-color: #ffffff;
+  color: #141924;
+}
+
+body.dark-theme {
+  background-color: #141924;
+  color: #ffffff;
+}
+
 .app-container-home {
   height: 100vh;
   width: 100vw;
@@ -84,6 +94,37 @@ h1 {
 }
 
 /*Navigation bar*/
+body.light-theme .navbar{
+  background-color: white;
+  color: #141924;
+}
+body.dark-theme .navbar{
+  background-color: #141924;
+  color: white;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+  color: lightgray;
+}
+
+body.light-theme .theme-toggle, 
+body.light-theme .icon, 
+body.light-theme .title,
+body.light-theme .bar-title {
+  color: #141924;
+}
+body.dark-theme .theme-toggle, 
+body.dark-theme .icon,
+body.dark-theme .title {
+  color: white;
+}
 
 .content-container {
   margin-top: 70px; 

@@ -7,6 +7,24 @@ const Navbar = () => {
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
+
+  const [isDarkTheme, setIsDarkTheme] = useState(true);
+
+  const toggleTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
+  };
+
+  useEffect(() => {
+    const body = document.body;
+
+    if (isDarkTheme) {
+      body.classList.add("dark-theme");
+      body.classList.remove("light-theme");
+    } else {
+      body.classList.add("light-theme");
+      body.classList.remove("dark-theme");
+    }
+  }, [isDarkTheme]);
   return (
     <nav className={`bg-gray-800 text-white navbar ${isDarkTheme ? "dark-theme" : "light-theme"}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -28,6 +46,9 @@ const Navbar = () => {
             />
           </div>
           <div className="hidden md:flex space-x-4">
+          <div className="theme-toggle" onClick={toggleTheme} style={{ cursor: 'pointer' }}>
+              {isDarkTheme ? <IoSunny size={24}  /> : <IoMoon size={24}  />}
+          </div>
             <Link
               to="/home"
               className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
