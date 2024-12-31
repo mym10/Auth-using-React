@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Modal, Box, Typography } from '@mui/material';
+import { ThemeContext } from './ThemeContext';
 
 const MovieModal = ({ 
     movieImage, 
@@ -11,6 +12,7 @@ const MovieModal = ({
     open, 
     onClose 
 }) => {
+    const { theme } = useContext(ThemeContext);
     return (
         <Modal open={open} onClose={onClose}>
             <Box
@@ -20,7 +22,8 @@ const MovieModal = ({
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
                     width: 500,
-                    bgcolor: 'background.paper',
+                    bgcolor: theme === 'light' ? '#fff' : '#333',
+                    color: theme === 'light' ? '#000' : '#fff',
                     boxShadow: 24,
                     p: 4,
                     borderRadius: 2,
@@ -44,16 +47,16 @@ const MovieModal = ({
                     <Typography variant="h6" component="h2" sx={{ fontWeight: 'bold', mb: 1 }}>
                         {movieTitle}
                     </Typography>
-                    <Typography variant="body2" sx={{ color: 'text.secondary', mb: 1 }}>
+                    <Typography variant="body2" sx={{ mb: 1 }}>
                         <strong>Year:</strong> {movieYear}
                     </Typography>
-                    <Typography variant="body2" sx={{ color: 'text.secondary', mb: 1 }}>
+                    <Typography variant="body2" sx={{ mb: 1 }}>
                         <strong>Runtime:</strong> {runtime}
                     </Typography>
-                    <Typography variant="body2" sx={{ color: 'text.secondary', mb: 1 }}>
+                    <Typography variant="body2" sx={{ mb: 1 }}>
                         <strong>Genres:</strong> {genres.join(', ')}
                     </Typography>
-                    <Typography variant="body2" sx={{ color: 'text.secondary', mb: 1 }}>
+                    <Typography variant="body2" sx={{ mb: 1 }}>
                         <strong>Director:</strong> {director}
                     </Typography>
                 </Box>

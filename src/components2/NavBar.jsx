@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { IoSearch, IoFilm, IoSunny, IoMoon} from "react-icons/io5";
+import { ThemeContext } from './ThemeContext';
 
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -8,25 +9,10 @@ const Navbar = () => {
     setSearchQuery(e.target.value);
   };
 
-  const [isDarkTheme, setIsDarkTheme] = useState(true);
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
-  const toggleTheme = () => {
-    setIsDarkTheme(!isDarkTheme);
-  };
-
-  useEffect(() => {
-    const body = document.body;
-
-    if (isDarkTheme) {
-      body.classList.add("dark-theme");
-      body.classList.remove("light-theme");
-    } else {
-      body.classList.add("light-theme");
-      body.classList.remove("dark-theme");
-    }
-  }, [isDarkTheme]);
   return (
-    <nav className={`bg-gray-800 text-white navbar ${isDarkTheme ? "dark-theme" : "light-theme"}`}>
+    <nav className='bg-gray-800 text-white' style={{backgroundColor: theme === 'light' ? '#DDE9F3' : '#141924', color: theme === 'light' ? '#000' : '#fff'}}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
@@ -42,28 +28,32 @@ const Navbar = () => {
               value={searchQuery}
               onChange={handleSearchChange}
               placeholder="Search..."
-              className="bg-gray-700 text-white rounded-md py-2 px-4 w-1/2 focus:outline-none focus:ring-2 focus:ring-gray-500"
+              className={`${theme === 'dark'? 'bg-gray-700 text-white focus:ring-gray-500' : 'bg-gray-400 text-black focus:ring-gray-500'} rounded-md py-2 px-4 w-1/2 focus:outline-none focus:ring-2 `}
             />
           </div>
-          <div className="hidden md:flex space-x-4">
-          <div className="theme-toggle" onClick={toggleTheme} style={{ cursor: 'pointer' }}>
-              {isDarkTheme ? <IoSunny size={24}  /> : <IoMoon size={24}  />}
-          </div>
+          <div className="hidden md:flex space-x-4" style={{ alignItems: 'center'}}>
+            <div onClick={toggleTheme} style={{ cursor: 'pointer' }}>
+              {theme === 'light' ? (
+                <IoMoon size={24} style={{ color: 'black' }} />
+              ) : (
+                <IoSunny size={24} style={{ color: 'white' }} />
+              )}
+            </div>
             <Link
               to="/home"
-              className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
+              className={`px-3 py-2 rounded-md text-sm font-medium ${theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-gray-300'}`}
             >
               Home
             </Link>
             <Link
               to="/about"
-              className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
+              className={`px-3 py-2 rounded-md text-sm font-medium ${theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-gray-300'}`}
             >
               About
             </Link>
             <Link
               to="/contact"
-              className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
+              className={`px-3 py-2 rounded-md text-sm font-medium ${theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-gray-300'}`}
             >
               Contact
             </Link>
