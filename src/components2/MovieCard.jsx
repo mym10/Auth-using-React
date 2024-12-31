@@ -5,10 +5,10 @@ import { ThemeContext } from './ThemeContext';
 
 const MovieCard = ({movieImage, movieTitle, actionText, onAction}) => {
     const { theme } = useContext(ThemeContext);
+    const openMovie = () => {} //open a new window to play the movie
     return (
         <Card sx={{ width: 350, 
         borderRadius: 2, 
-        // backgroundColor: 'transparent', 
         backgroundColor: theme === 'light' ? 'white' : '#333',
         overflow: 'visible',
         color: theme === 'light' ? '#000' : '#fff' 
@@ -31,9 +31,9 @@ const MovieCard = ({movieImage, movieTitle, actionText, onAction}) => {
                     </Typography>
                     <div className="movie-container-actions">
                         <div className="left-icons">
-                            <IoCaretForwardCircle size={35} style={{ color: theme === 'light' ? '#333' : 'lightgray' }} />
-                            <IoAddCircle size={35} style={{ color: theme === 'light' ? '#333' : 'lightgray' }} />
-                            <IoHeartCircle size={35} style={{ color: theme === 'light' ? '#333' : 'lightgray' }} />
+                            <IoCaretForwardCircle size={35} style={{ color: theme === 'light' ? '#333' : 'lightgray', cursor: 'pointer' }} onClick={openMovie} />
+                            <IoAddCircle size={35} style={{ color: theme === 'light' ? '#333' : 'lightgray', cursor: 'pointer' }}/>
+                            <IoHeartCircle size={35} style={{ color: theme === 'light' ? '#333' : 'lightgray', cursor: 'pointer' }} />
                         </div>
                         <div className="action-text">
                             <CardActions sx={{ justifyContent: 'flex-end' }}>

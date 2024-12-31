@@ -12,7 +12,7 @@ const Navbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <nav className='bg-gray-800 text-white'>
+    <nav className='bg-gray-800 text-white' style={{backgroundColor: theme === 'light' ? '#f8f9fa' : '#343a40', color: theme === 'light' ? '#343a40' : '#fff',}}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
@@ -28,13 +28,13 @@ const Navbar = () => {
               value={searchQuery}
               onChange={handleSearchChange}
               placeholder="Search..."
-              className={`${theme === 'dark'? 'bg-gray-700 text-white focus:ring-gray-500' : 'bg-gray-400 text-black focus:ring-gray-500'} rounded-md py-2 px-4 w-1/2 focus:outline-none focus:ring-2 `}
+              className={`${theme === 'dark'? 'bg-gray-700 text-white focus:ring-gray-500 placeholder-gray-400' : 'bg-gray-400 text-black focus:ring-gray-500 placeholder-gray-700'} rounded-md py-2 px-4 w-1/2 focus:outline-none focus:ring-2 `}
             />
           </div>
           <div className="hidden md:flex space-x-4" style={{ alignItems: 'center'}}>
             <div onClick={toggleTheme} style={{ cursor: 'pointer' }}>
               {theme === 'light' ? (
-                <IoMoon size={24} style={{ color: 'black' }} />
+                <IoMoon size={24} style={{ color: '#343a40' }} />
               ) : (
                 <IoSunny size={24} style={{ color: 'white' }} />
               )}

@@ -88,7 +88,7 @@ const Home = () => {
                     </select>
                 </div>
                 <div className='bar-title' style={{ borderBottom: `${theme === 'light' ? '#ccc' : '#444'}` }}>
-                <h2>Watched Movies</h2><IoChevronForwardSharp size={35} style={{ color: theme === 'light' ? '#000' : 'lightgray' }}/>
+                <h2>Watched Movies</h2><IoChevronForwardSharp size={35} style={{ color: theme === 'light' ? '#000' : 'lightgray', cursor: 'pointer' }} />
                 </div>
                 <div className='home-user-watches'>
                 {movies.map((movie, index) => (
@@ -103,7 +103,7 @@ const Home = () => {
                 ))}
                 </div>
                 <div className='bar-title' style={{ borderBottom: ` ${theme === 'light' ? '#ccc' : '#444'}` }}>
-                <h2>Recommended Movies</h2><IoChevronForwardSharp size={35} style={{ color: theme === 'light' ? '#000' : 'lightgray' }}/>
+                <h2>Recommended Movies</h2><IoChevronForwardSharp size={35} style={{ color: theme === 'light' ? '#000' : 'lightgray', cursor: 'pointer' }}/>
                 </div>
                 <div className='home-recommended'>
                 {shuffleArray(movies).map((movie, index) => (
@@ -118,7 +118,7 @@ const Home = () => {
                 ))}
                 </div>
                 <div className='bar-title' style={{ borderBottom: `${theme === 'light' ? '#ccc' : '#444'}` }}>
-                <h2>Top 10 in India</h2><IoChevronForwardSharp size={35} style={{ color: theme === 'light' ? '#000' : 'lightgray' }}/>
+                <h2>Top 10 in India</h2><IoChevronForwardSharp size={35} style={{ color: theme === 'light' ? '#000' : 'lightgray', cursor: 'pointer' }}/>
                 </div>
                 <div className='home-top-10'>
                 {shuffleArray(movies).map((movie, index) => (
