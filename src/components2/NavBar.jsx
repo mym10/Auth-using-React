@@ -1,12 +1,21 @@
 import React, {useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IoSearch, IoFilm, IoSunny, IoMoon} from "react-icons/io5";
 import { ThemeContext } from './ThemeContext';
 
 const Navbar = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const handleSearchChange = (e) => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
+
+  const handleInputChange = (e) => {
     setSearchQuery(e.target.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+    }
   };
 
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -23,13 +32,15 @@ const Navbar = () => {
           </div>
           <div className="hidden md:flex flex-grow justify-center items-center space-x-2">
           <IoSearch />
+          <form onSubmit={handleSearchSubmit} className="w-full max-w-lg" >
             <input
               type="text"
               value={searchQuery}
-              onChange={handleSearchChange}
+              onChange={handleInputChange}
               placeholder="Search..."
-              className={`${theme === 'dark'? 'bg-gray-700 text-white focus:ring-gray-500 placeholder-gray-400' : 'bg-gray-400 text-black focus:ring-gray-500 placeholder-gray-700'} rounded-md py-2 px-4 w-1/2 focus:outline-none focus:ring-2 `}
+              className={`${theme === 'dark'? 'bg-gray-700 text-white focus:ring-gray-500 placeholder-gray-400' : 'bg-gray-400 text-black focus:ring-gray-500 placeholder-gray-700'} rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 `}
             />
+            </form>
           </div>
           <div className="hidden md:flex space-x-4" style={{ alignItems: 'center'}}>
             <div onClick={toggleTheme} style={{ cursor: 'pointer' }}>
@@ -39,24 +50,9 @@ const Navbar = () => {
                 <IoSunny size={24} style={{ color: 'white' }} />
               )}
             </div>
-            <Link
-              to="/home"
-              className={`px-3 py-2 rounded-md text-sm font-medium ${theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-gray-300'}`}
-            >
-              Home
-            </Link>
-            <Link
-              to="/about"
-              className={`px-3 py-2 rounded-md text-sm font-medium ${theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-gray-300'}`}
-            >
-              About
-            </Link>
-            <Link
-              to="/contact"
-              className={`px-3 py-2 rounded-md text-sm font-medium ${theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-gray-300'}`}
-            >
-              Contact
-            </Link>
+            <Link to="/home" className={`px-3 py-2 rounded-md text-sm font-medium ${theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-gray-300'}`}>Home</Link>
+            <Link to="/about" className={`px-3 py-2 rounded-md text-sm font-medium ${theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-gray-300'}`}>About</Link>
+            <Link to="/contact" className={`px-3 py-2 rounded-md text-sm font-medium ${theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-gray-300'}`}>Contact</Link>
           </div>
           <div className="md:hidden">
             <button

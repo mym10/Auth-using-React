@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import MovieCard from '../components2/MovieCard';
 import movies from '../movies.json';
 import MovieModal from '../components2/MovieModal';
 import { IoChevronForwardSharp } from "react-icons/io5";
 import { ThemeContext } from '../components2/ThemeContext';
-
 
 const Home = () => {
     const [modalOpen, setModalOpen] = useState(false);
@@ -39,8 +39,12 @@ const Home = () => {
 
     const genres = ["Action","Comedy","Drama","Horror","Romance","Sci-Fi","Thriller","Fantasy","Animation","Documentary"];
 
-    const handleGenreChange = (event) => {
-        setSelectedGenre(event.target.value);
+    const navigate = useNavigate();
+
+    const handleGenreChange = (e) => {
+        const genre = e.target.value;
+        setSelectedGenre(genre);
+        navigate(`/search?q=${encodeURIComponent(genre)}`);
     };
 
     return (

@@ -7,7 +7,7 @@ const MovieCard = ({movieImage, movieTitle, actionText, onAction}) => {
     const { theme } = useContext(ThemeContext);
     const openMovie = () => {} //open a new window to play the movie
     return (
-        <Card sx={{ width: 350, 
+        <Card sx={{ width: 300, 
         borderRadius: 2, 
         backgroundColor: theme === 'light' ? 'white' : '#333',
         overflow: 'visible',
@@ -43,8 +43,9 @@ const MovieCard = ({movieImage, movieTitle, actionText, onAction}) => {
                                     sx={{
                                         textAlign: 'center',
                                         fontSize: '15px',
+                                        fontFamily: "Poppins",
                                         cursor: 'pointer',
-                                        padding: '5px 10px',
+                                        padding: '5px 5px',
                                         border: `2px solid ${theme === 'light' ? '#333' : 'white'}`,
                                         borderRadius: '4px',
                                         display: 'inline-block',

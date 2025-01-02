@@ -26,7 +26,7 @@ const About = () => {
         <div className='about-page'>
             <div className='about-page-content' style={dynamicStyles}>
                 <div className='about-header'>
-                    <h2>About Us</h2>
+                    <h1 style={{margin: '30px'}}>About Us</h1>
                     <p style={{color: theme === 'dark' ? 'white' : 'black',}}>
                         Welcome to TakeTwo, your ultimate destination for discovering and enjoying movies! We are a passionate team of movie lovers dedicated to bringing you a seamless and personalized experience.
                     </p>
