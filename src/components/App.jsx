@@ -9,7 +9,6 @@ import { IoFilm } from "react-icons/io5";
 import popbg from '../assets/popbg.jpg';
 import popbgFlipped from '../assets/popbgFlipped.jpg'
 import NavBar from '../components2/NavBar';
-import ThemeProvider from '../components2/ThemeContext';
 import SearchResults from "./searchResults";
 
 const App = () => {
@@ -32,8 +31,34 @@ const App = () => {
 
   const showNavbar = location.pathname !== '/'; 
 
+  //theme setting
+  const [theme, setTheme] = useState('dark');
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
+
+  const themeStyles = {
+    light: {
+      background: '#DDE9F3',
+      color: '#000',
+      translucent: 'rgba(255, 255, 255, 0.61)',
+    },
+    dark: {
+      background: '#141924',
+      color: '#fff',
+      translucent: 'rgba(0, 0, 0, 0.5)',
+    },
+  };
+
+  const currentTheme = themeStyles[theme];
+
+  useEffect(() => {
+    document.body.style.backgroundColor = currentTheme.background;
+    document.body.style.color = currentTheme.color;
+  }, [currentTheme]);
+
   return (
-    <ThemeProvider>
       <div key={isLogin ? 'login' : 'signup'} 
       className={`${location.pathname === '/' ? 'app-container-login' : 'app-container-home'}`}
       style={{ background: location.pathname === '/'  ? isLogin
@@ -43,7 +68,7 @@ const App = () => {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}>
-        {showNavbar && <NavBar />} 
+        {showNavbar && <NavBar theme={theme} toggleTheme={toggleTheme} themeStyles={themeStyles}/>} 
         <Routes>
           <Route
             path="/"
@@ -57,13 +82,12 @@ const App = () => {
               </>
             }
           />
-          <Route path="/home" element={<Home />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/search" element={<SearchResults />} />
+          <Route path="/home" element={<Home theme={theme} currentTheme={currentTheme}/>} />
+          <Route path="/contact" element={<Contact theme={theme} currentTheme={currentTheme}/>} />
+          <Route path="/about" element={<About currentTheme={currentTheme}/>} />
+          <Route path="/search" element={<SearchResults currentTheme={currentTheme}/>} />
         </Routes>
       </div>
-    </ThemeProvider>
   );
 };
 

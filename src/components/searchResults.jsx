@@ -1,17 +1,15 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import MovieCard from '../components2/MovieCard';
 import movies from '../movies.json';
 import MovieModal from '../components2/MovieModal';
-import { ThemeContext } from '../components2/ThemeContext';
 
-const SearchResults = () => {
+const SearchResults = (currentTheme) => {
   const location = useLocation();
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const { theme } = useContext(ThemeContext);
 
   const handleMovieAction = (movie) => {
     setSelectedMovie(movie);
@@ -42,7 +40,7 @@ const SearchResults = () => {
   }, [location.search]);
 
   return (
-    <div className='search-results-home' style={{backgroundColor: theme === 'light' ? '#DDE9F3' : '#141924', color: theme === 'light' ? '#000' : '#fff'}}>
+    <div className='search-results-home' style={{backgroundColor:currentTheme.backgroundColor, color: currentTheme.color}}>
       <h2>Search Results for "{searchQuery || 'All'}"</h2>
       <div className='search-results'>
         {searchResults.length > 0 ? (

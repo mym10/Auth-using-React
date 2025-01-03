@@ -1,9 +1,8 @@
-import React, {useState, useContext } from 'react';
+import React, {useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoSearch, IoFilm, IoSunny, IoMoon} from "react-icons/io5";
-import { ThemeContext } from './ThemeContext';
 
-const Navbar = () => {
+const Navbar = ({ theme, toggleTheme, themeStyles }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
@@ -18,14 +17,12 @@ const Navbar = () => {
     }
   };
 
-  const { theme, toggleTheme } = useContext(ThemeContext);
-
   return (
-    <nav className='bg-gray-800 text-white' style={{backgroundColor: theme === 'light' ? '#f8f9fa' : '#343a40', color: theme === 'light' ? '#343a40' : '#fff',}}>
+    <nav className='bg-gray-800 text-white' style={{ backgroundColor: themeStyles[theme].background, color: themeStyles[theme].color}}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <Link to="/" className="text-xl font-bold flex items-center title" style={{ gap: '8px' }}>
+            <Link to="/" className="text-xl font-bold flex items-center title" style={{ gap: '8px', color: themeStyles[theme].color }}>
             <IoFilm size={30} className='icon'/>
               TAKETWO
             </Link>
@@ -38,7 +35,12 @@ const Navbar = () => {
               value={searchQuery}
               onChange={handleInputChange}
               placeholder="Search..."
-              className={`${theme === 'dark'? 'bg-gray-700 text-white focus:ring-gray-500 placeholder-gray-400' : 'bg-gray-400 text-black focus:ring-gray-500 placeholder-gray-700'} rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 `}
+              className={"rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2"}
+              style={{
+                backgroundColor: theme === 'dark' ? '#4B5563' : '#d5d7db',
+                color: themeStyles[theme].color,
+                placeholder: theme === 'dark' ? '#9CA3AF' : '#6B7280',
+              }}
             />
             </form>
           </div>
@@ -50,9 +52,10 @@ const Navbar = () => {
                 <IoSunny size={24} style={{ color: 'white' }} />
               )}
             </div>
-            <Link to="/home" className={`px-3 py-2 rounded-md text-sm font-medium ${theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-gray-300'}`}>Home</Link>
-            <Link to="/about" className={`px-3 py-2 rounded-md text-sm font-medium ${theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-gray-300'}`}>About</Link>
-            <Link to="/contact" className={`px-3 py-2 rounded-md text-sm font-medium ${theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-gray-300'}`}>Contact</Link>
+            <Link to="/home" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-500 hover:text-white">Home</Link>
+            <Link to="/about" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-500 hover:text-white">About</Link>
+            <Link to="/contact" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-500 hover:text-white">Contact</Link>
+
           </div>
           <div className="md:hidden">
             <button

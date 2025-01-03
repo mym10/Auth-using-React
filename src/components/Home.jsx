@@ -1,12 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MovieCard from '../components2/MovieCard';
 import movies from '../movies.json';
 import MovieModal from '../components2/MovieModal';
 import { IoChevronForwardSharp } from "react-icons/io5";
-import { ThemeContext } from '../components2/ThemeContext';
 
-const Home = () => {
+const Home = ({theme, currentTheme}) => {
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedMovie, setSelectedMovie] = useState(null);
 
@@ -19,7 +18,6 @@ const Home = () => {
         setModalOpen(!modalOpen);
     };
 
-    const { theme } = useContext(ThemeContext);
     const gradientColor = theme === 'dark'
         ? 'linear-gradient(to bottom, rgba(20, 25, 36, 0) 0%, #141924 100%)'
         : 'linear-gradient(to bottom, rgba(255, 255, 255, 0) 60%, #DDE9F3 100%)';
@@ -48,15 +46,14 @@ const Home = () => {
     };
 
     return (
-        <div className='home-page' style={{backgroundColor: theme === 'light' ? '#DDE9F3' : '#141924', color: theme === 'light' ? '#000' : '#fff'}}>
+        <div className='home-page' style={{backgroundColor: currentTheme.background, color: currentTheme.color}}>
             <div className="home-page-video">
                 <iframe 
                 src="https://www.youtube.com/embed/d9MyW72ELq0?autoplay=1&mute=1&loop=1&playlist=d9MyW72ELq0&controls=0&modestbranding=1&rel=0&showinfo=0" 
                 title="YouTube video player" 
                 frameborder="0" 
                 allow="autoplay; encrypted-media" 
-                allowfullscreen>
-                </iframe>
+                allowfullscreen/>
                 <div
                 style={{
                     content: '""',
@@ -78,8 +75,8 @@ const Home = () => {
                         value={selectedGenre}
                         onChange={handleGenreChange}
                         style={{
-                            backgroundColor: theme === 'light' ? '#fff' : '#333',
-                            color: theme === 'light' ? '#000' : '#fff',
+                            backgroundColor: theme ==='light' ? 'lightgray' : '#333',
+                            color: theme ==='light' ? '#333' : 'lightgray',
                             border: `1px solid ${theme === 'light' ? '#ccc' : '#444'}`,
                         }}
                     >
@@ -102,6 +99,8 @@ const Home = () => {
                             movieTitle={movie.Title}
                             actionText="View Details"
                             onAction={() => handleMovieAction(movie)}
+                            theme = {theme}
+                            currentTheme={currentTheme}
                         />
                     </React.Fragment>
                 ))}
@@ -117,6 +116,8 @@ const Home = () => {
                             movieTitle={movie.Title}
                             actionText="View Details"
                             onAction={() => handleMovieAction(movie)}
+                            theme = {theme}
+                            currentTheme={currentTheme}
                         />
                     </React.Fragment>
                 ))}
@@ -132,6 +133,8 @@ const Home = () => {
                             movieTitle={movie.Title}
                             actionText="View Details"
                             onAction={() => handleMovieAction(movie)}
+                            theme = {theme}
+                            currentTheme={currentTheme}
                         />
                     </React.Fragment>
                 ))}
@@ -147,6 +150,8 @@ const Home = () => {
                     director={selectedMovie.Director}
                     open={modalOpen}
                     onClose={handleModalToggle}
+                    theme = {theme}
+                    currentTheme={currentTheme}
                 />
             )}     
         </div>

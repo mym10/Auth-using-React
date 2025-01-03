@@ -1,17 +1,15 @@
-import React, {useContext} from "react";
+import React from "react";
 import { Card, CardContent, CardActions, Typography } from '@mui/material';
 import { IoAddCircle, IoCaretForwardCircle, IoHeartCircle } from "react-icons/io5";
-import { ThemeContext } from './ThemeContext';
 
-const MovieCard = ({movieImage, movieTitle, actionText, onAction}) => {
-    const { theme } = useContext(ThemeContext);
+const MovieCard = ({movieImage, movieTitle, actionText, onAction, theme, currentTheme}) => {
     const openMovie = () => {} //open a new window to play the movie
     return (
         <Card sx={{ width: 300, 
         borderRadius: 2, 
-        backgroundColor: theme === 'light' ? 'white' : '#333',
+        backgroundColor: theme ==='light' ? 'lightgray' : '#333',
         overflow: 'visible',
-        color: theme === 'light' ? '#000' : '#fff' 
+        color: theme ==='light' ? '#333' : 'lightgray'
         }}>
             <CardContent sx={{ "&:last-child": { padding: 0} }}>
                 <div className="movie-container">
@@ -25,15 +23,15 @@ const MovieCard = ({movieImage, movieTitle, actionText, onAction}) => {
                         whiteSpace: 'nowrap', 
                         overflow: 'hidden', 
                         textOverflow: 'ellipsis', 
-                        color: theme === 'light' ? '#333' : 'lightgray'
+                        color: theme ==='light' ? '#333' : 'lightgray'
                         }}>
                         {movieTitle}
                     </Typography>
                     <div className="movie-container-actions">
                         <div className="left-icons">
-                            <IoCaretForwardCircle size={35} style={{ color: theme === 'light' ? '#333' : 'lightgray', cursor: 'pointer' }} onClick={openMovie} />
-                            <IoAddCircle size={35} style={{ color: theme === 'light' ? '#333' : 'lightgray', cursor: 'pointer' }}/>
-                            <IoHeartCircle size={35} style={{ color: theme === 'light' ? '#333' : 'lightgray', cursor: 'pointer' }} />
+                            <IoCaretForwardCircle size={35} style={{ color: theme ==='light' ? '#333' : 'lightgray', cursor: 'pointer' }} onClick={openMovie} />
+                            <IoAddCircle size={35} style={{ color: theme ==='light' ? '#333' : 'lightgray', cursor: 'pointer' }}/>
+                            <IoHeartCircle size={35} style={{ color: theme ==='light' ? '#333' : 'lightgray', cursor: 'pointer' }} />
                         </div>
                         <div className="action-text">
                             <CardActions sx={{ justifyContent: 'flex-end' }}>
@@ -46,12 +44,12 @@ const MovieCard = ({movieImage, movieTitle, actionText, onAction}) => {
                                         fontFamily: "Poppins",
                                         cursor: 'pointer',
                                         padding: '5px 5px',
-                                        border: `2px solid ${theme === 'light' ? '#333' : 'white'}`,
+                                        border: `2px solid ${theme ==='light' ? '#333' : 'lightgray'}`,
                                         borderRadius: '4px',
                                         display: 'inline-block',
                                         transition: '0.3s ease',
-                                        backgroundColor: theme === 'light' ? '#f0f0f0' : '#444',
-                                        color: theme === 'light' ? 'black' : 'white',
+                                        backgroundColor: currentTheme.background,
+                                        color: currentTheme.color,
                                         '&:hover': { 
                                             backgroundColor: theme === 'light' ? '#ddd' : 'black', 
                                             color: theme === 'light' ? 'black' : 'white' 

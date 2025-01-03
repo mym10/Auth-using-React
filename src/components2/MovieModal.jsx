@@ -1,6 +1,6 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import { Modal, Box, Typography } from '@mui/material';
-import { ThemeContext } from './ThemeContext';
+
 
 const MovieModal = ({ 
     movieImage, 
@@ -10,9 +10,10 @@ const MovieModal = ({
     genres = [], 
     director,
     open, 
-    onClose 
+    onClose, 
+    theme,
+    currentTheme
 }) => {
-    const { theme } = useContext(ThemeContext);
     return (
         <Modal open={open} onClose={onClose}>
             <Box
@@ -22,8 +23,8 @@ const MovieModal = ({
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
                     width: 500,
-                    bgcolor: theme === 'light' ? '#fff' : '#333',
-                    color: theme === 'light' ? '#000' : '#fff',
+                    bgcolor: theme ==='light' ? 'lightgray' : '#333',
+                    color: theme ==='light' ? '#333' : 'lightgray',
                     boxShadow: 24,
                     p: 4,
                     borderRadius: 2,
