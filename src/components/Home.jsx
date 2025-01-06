@@ -3,11 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import MovieCard from '../components2/MovieCard';
 import movies from '../movies.json';
 import MovieModal from '../components2/MovieModal';
-import { IoChevronForwardSharp } from "react-icons/io5";
+import { IoChevronForwardSharp, IoChatbubbleSharp } from "react-icons/io5";
+import CarouselComponent from '../components2/CarouselComponent';
+import Fab from '@mui/material/Fab';
+import ChatDrawer from '../components2/ChatbotComponent';
 
 const Home = ({theme, currentTheme}) => {
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedMovie, setSelectedMovie] = useState(null);
+    const [drawerOpen, setDrawerOpen] = useState(false);
 
     const handleMovieAction = (movie) => {
         setSelectedMovie(movie);
@@ -45,28 +49,37 @@ const Home = ({theme, currentTheme}) => {
         navigate(`/search?q=${encodeURIComponent(genre)}`);
     };
 
+    //carousel data 
+    const carouselSlides = [
+        { src: "https://www.youtube.com/embed/1JLUn2DFW4w?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&showinfo=0&playlist=1JLUn2DFW4w" },
+        { src: "https://www.youtube.com/embed/6ZfuNTqbHE8?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&showinfo=0&playlist=6ZfuNTqbHE8" },
+        { src: "https://www.youtube.com/embed/d9MyW72ELq0?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&showinfo=0&playlist=d9MyW72ELq0" }
+    ];
+
+    //drawer functions
+    const toggleDrawer = (isOpen) => () => {
+        setDrawerOpen(isOpen);
+    };
+
     return (
         <div className='home-page' style={{backgroundColor: currentTheme.background, color: currentTheme.color}}>
-            <div className="home-page-video">
-                <iframe 
-                src="https://www.youtube.com/embed/d9MyW72ELq0?autoplay=1&mute=1&loop=1&playlist=d9MyW72ELq0&controls=0&modestbranding=1&rel=0&showinfo=0" 
-                title="YouTube video player" 
-                frameborder="0" 
-                allow="autoplay; encrypted-media" 
-                allowfullscreen/>
-                <div
-                style={{
-                    content: '""',
+            <div className="carousel-container">
+                <CarouselComponent
+                    slides={carouselSlides}
+                    autoPlay={true}
+                    infiniteLoop={true}
+                    interval={5000}
+                />
+                <div className="carousel-gradient-overlay" style={{
                     position: 'absolute',
                     bottom: 0,
                     left: 0,
-                    width: '100vw',
-                    height: '15%',
+                    width: '100%',
+                    height: '100px', 
                     background: gradientColor,
-                    pointerEvents: 'none',
                     zIndex: 1,
-                }}
-            />
+                    pointerEvents: 'none',
+                }}></div>
             </div>
             <div className="home-page-content">
                 <div className="dropdown-container">
@@ -89,12 +102,13 @@ const Home = ({theme, currentTheme}) => {
                     </select>
                 </div>
                 <div className='bar-title' style={{ borderBottom: `${theme === 'light' ? '#ccc' : '#444'}` }}>
-                <h2>Watched Movies</h2><IoChevronForwardSharp size={35} style={{ color: theme === 'light' ? '#000' : 'lightgray', cursor: 'pointer' }} />
+                <h2 class="watched-movies-title">Watched Movies</h2><IoChevronForwardSharp size={35} style={{ color: '#fff' }} />
                 </div>
                 <div className='home-user-watches'>
-                {movies.map((movie, index) => (
+                {shuffleArray(movies).map((movie, index) => (
                     <React.Fragment key={index}>
                         <MovieCard
+                            movie = {movie}
                             movieImage={movie.Images[0]}
                             movieTitle={movie.Title}
                             actionText="View Details"
@@ -112,6 +126,7 @@ const Home = ({theme, currentTheme}) => {
                 {shuffleArray(movies).map((movie, index) => (
                     <React.Fragment key={index}>
                         <MovieCard
+                            movie = {movie}
                             movieImage={movie.Images[0]}
                             movieTitle={movie.Title}
                             actionText="View Details"
@@ -129,6 +144,7 @@ const Home = ({theme, currentTheme}) => {
                 {shuffleArray(movies).map((movie, index) => (
                     <React.Fragment key={index}>
                         <MovieCard
+                            movie = {movie}
                             movieImage={movie.Images[0]}
                             movieTitle={movie.Title}
                             actionText="View Details"
@@ -153,7 +169,26 @@ const Home = ({theme, currentTheme}) => {
                     theme = {theme}
                     currentTheme={currentTheme}
                 />
-            )}     
+            )}    
+
+            <div>
+                <Fab
+                    size="large"
+                    aria-label="chat"
+                    onClick={toggleDrawer(true)}
+                    sx={{
+                    position: 'fixed',
+                    bottom: '40px',
+                    right: '40px',
+                    backgroundColor: '#845ec2',
+                    color: '#fff',
+                    '&:hover': { backgroundColor: '#2D3748' },
+                    }}
+                >
+                    <IoChatbubbleSharp size={25} />
+                </Fab>
+                <ChatDrawer open={drawerOpen} toggleDrawer={toggleDrawer} />
+                </div>
         </div>
     );
 };

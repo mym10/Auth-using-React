@@ -1,9 +1,24 @@
-import React from "react";
+import React, {useState} from "react";
 import { Card, CardContent, CardActions, Typography } from '@mui/material';
-import { IoAddCircle, IoCaretForwardCircle, IoHeartCircle } from "react-icons/io5";
+import { IoAdd, IoCaretForward, IoHeart } from "react-icons/io5";
 
-const MovieCard = ({movieImage, movieTitle, actionText, onAction, theme, currentTheme}) => {
+const MovieCard = ({movieImage, movieTitle, actionText, onAction, theme, currentTheme, movie}) => {
     const openMovie = () => {} //open a new window to play the movie
+
+    const [isClicked, setIsClicked] = useState(() => 
+        JSON.parse(localStorage.getItem("favourites"))?.some(fav => fav.Title === movie.Title) || false 
+    )
+    const handleClick = () => {
+        setIsClicked(!isClicked);
+        let favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+        if (!isClicked) {
+            favourites.push(movie); //add to favourites
+        } else {
+            favourites = favourites.filter(fav => fav.Title !== movie.Title); //remove from favourites
+        }
+        localStorage.setItem("favourites", JSON.stringify(favourites));
+    }
+
     return (
         <Card sx={{ width: 300, 
         borderRadius: 2, 
@@ -29,9 +44,9 @@ const MovieCard = ({movieImage, movieTitle, actionText, onAction, theme, current
                     </Typography>
                     <div className="movie-container-actions">
                         <div className="left-icons">
-                            <IoCaretForwardCircle size={35} style={{ color: theme ==='light' ? '#333' : 'lightgray', cursor: 'pointer' }} onClick={openMovie} />
-                            <IoAddCircle size={35} style={{ color: theme ==='light' ? '#333' : 'lightgray', cursor: 'pointer' }}/>
-                            <IoHeartCircle size={35} style={{ color: theme ==='light' ? '#333' : 'lightgray', cursor: 'pointer' }} />
+                            <IoCaretForward size={30} style={{ color: theme ==='light' ? '#333' : 'lightgray', cursor: 'pointer' }} onClick={openMovie} />
+                            <IoAdd size={30} style={{ color: theme ==='light' ? '#333' : 'lightgray', cursor: 'pointer' }} />
+                            <IoHeart size={30} style={{ color: isClicked ? '#990f02' : theme ==='light' ? '#333' : 'lightgray', cursor: 'pointer'}} onClick={handleClick} />
                         </div>
                         <div className="action-text">
                             <CardActions sx={{ justifyContent: 'flex-end' }}>

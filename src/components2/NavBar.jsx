@@ -18,7 +18,7 @@ const Navbar = ({ theme, toggleTheme, themeStyles }) => {
   };
 
   return (
-    <nav className='bg-gray-800 text-white' style={{ backgroundColor: themeStyles[theme].background, color: themeStyles[theme].color}}>
+    <nav className='bg-gray-800 text-white navbar' style={{ backgroundColor: themeStyles[theme].background, color: themeStyles[theme].color}}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
@@ -28,7 +28,7 @@ const Navbar = ({ theme, toggleTheme, themeStyles }) => {
             </Link>
           </div>
           <div className="hidden md:flex flex-grow justify-center items-center space-x-2">
-          <IoSearch />
+          <IoSearch size={25}/>
           <form onSubmit={handleSearchSubmit} className="w-full max-w-lg" >
             <input
               type="text"
@@ -53,6 +53,7 @@ const Navbar = ({ theme, toggleTheme, themeStyles }) => {
               )}
             </div>
             <Link to="/home" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-500 hover:text-white">Home</Link>
+            <Link to="/favourites" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-500 hover:text-white">Favourites</Link>
             <Link to="/about" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-500 hover:text-white">About</Link>
             <Link to="/contact" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-500 hover:text-white">Contact</Link>
 

@@ -4,7 +4,7 @@ import MovieCard from '../components2/MovieCard';
 import movies from '../movies.json';
 import MovieModal from '../components2/MovieModal';
 
-const SearchResults = (currentTheme) => {
+const SearchResults = ({theme, currentTheme}) => {
   const location = useLocation();
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
@@ -18,7 +18,7 @@ const SearchResults = (currentTheme) => {
 
   const handleModalToggle = () => {
     setModalOpen(!modalOpen);
-};
+  };
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -47,10 +47,13 @@ const SearchResults = (currentTheme) => {
           searchResults.map((movie, index) => (
             <MovieCard
               key={index}
+              movie = {movie}
               movieImage={movie.Images[0]}
               movieTitle={movie.Title}
               actionText="View Details"
               onAction={() => handleMovieAction(movie)}
+              theme={theme}
+              currentTheme={currentTheme}
             />
           ))
         ) : (
@@ -67,6 +70,8 @@ const SearchResults = (currentTheme) => {
                     director={selectedMovie.Director}
                     open={modalOpen}
                     onClose={handleModalToggle}
+                    theme={theme}
+                    currentTheme={currentTheme}
                 />
     )} 
     </div>

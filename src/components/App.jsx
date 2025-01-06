@@ -10,6 +10,7 @@ import popbg from '../assets/popbg.jpg';
 import popbgFlipped from '../assets/popbgFlipped.jpg'
 import NavBar from '../components2/NavBar';
 import SearchResults from "./searchResults";
+import Favourites from "./Favourites";
 
 const App = () => {
   //login/signup
@@ -83,9 +84,10 @@ const App = () => {
             }
           />
           <Route path="/home" element={<Home theme={theme} currentTheme={currentTheme}/>} />
-          <Route path="/contact" element={<Contact theme={theme} currentTheme={currentTheme}/>} />
+          <Route path="/favourites" element={<Favourites theme={theme} currentTheme={currentTheme}/>} />
+          <Route path="/contact" element={<Contact currentTheme={currentTheme}/>} />
           <Route path="/about" element={<About currentTheme={currentTheme}/>} />
-          <Route path="/search" element={<SearchResults currentTheme={currentTheme}/>} />
+          <Route path="/search" element={<SearchResults theme={theme} currentTheme={currentTheme}/>} />
         </Routes>
       </div>
   );
