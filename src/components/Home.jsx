@@ -115,6 +115,7 @@ const Home = ({theme, currentTheme}) => {
                             onAction={() => handleMovieAction(movie)}
                             theme = {theme}
                             currentTheme={currentTheme}
+                            movieTrailer={movie.Trailer}
                         />
                     </React.Fragment>
                 ))}
@@ -133,6 +134,7 @@ const Home = ({theme, currentTheme}) => {
                             onAction={() => handleMovieAction(movie)}
                             theme = {theme}
                             currentTheme={currentTheme}
+                            movieTrailer={movie.Trailer}
                         />
                     </React.Fragment>
                 ))}
@@ -151,6 +153,7 @@ const Home = ({theme, currentTheme}) => {
                             onAction={() => handleMovieAction(movie)}
                             theme = {theme}
                             currentTheme={currentTheme}
+                            movieTrailer={movie.Trailer}
                         />
                     </React.Fragment>
                 ))}

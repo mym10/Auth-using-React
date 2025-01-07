@@ -11,16 +11,37 @@ import popbgFlipped from '../assets/popbgFlipped.jpg'
 import NavBar from '../components2/NavBar';
 import SearchResults from "./searchResults";
 import Favourites from "./Favourites";
+//skeletons
+import HomeSkeleton from '../components2/Skeletons/HomeSkeleton';
+import FavouritesSkeleton from '../components2/Skeletons/FavouritesSkeleton';
+import SearchResultsSkeleton from '../components2/Skeletons/SearchResultsSkeleton';
+
 
 const App = () => {
+  //skeletons
+  const [isLoading, setIsLoading] = useState(false);
+  const location = useLocation();
+
+  const renderSkeleton = () => {
+    if (location.pathname === '/favourites') return <FavouritesSkeleton />;
+    if (location.pathname === '/home') return <HomeSkeleton />;
+    if (location.pathname === '/search') return <SearchResultsSkeleton />
+    return null;
+  };
+
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => setIsLoading(false), 1500);
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
+
+
   //login/signup
   const [isLogin, setIsLogin] = useState(true);
 
   const toggleAuthPage = () => {
     setIsLogin(!isLogin);
   };
-
-  const location = useLocation();
 
   useEffect(() => {
     if (location.pathname !== "/") {
@@ -69,26 +90,30 @@ const App = () => {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}>
-        {showNavbar && <NavBar theme={theme} toggleTheme={toggleTheme} themeStyles={themeStyles}/>} 
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Link to="/" className="text-5xl font-bold text-white flex items-center" style={{ gap: '10px', position: 'absolute', top: '7rem', left: '50%', transform: 'translateX(-50%)' }}>
-                  <IoFilm size={50} style={{ color: 'white' }} />
-                  TAKE-TWO
-                </Link>
-                <LoginCard isLogin={isLogin} toggleAuthPage={toggleAuthPage} />
-              </>
-            }
-          />
-          <Route path="/home" element={<Home theme={theme} currentTheme={currentTheme}/>} />
-          <Route path="/favourites" element={<Favourites theme={theme} currentTheme={currentTheme}/>} />
-          <Route path="/contact" element={<Contact currentTheme={currentTheme}/>} />
-          <Route path="/about" element={<About currentTheme={currentTheme}/>} />
-          <Route path="/search" element={<SearchResults theme={theme} currentTheme={currentTheme}/>} />
-        </Routes>
+        {showNavbar && <NavBar theme={theme} toggleTheme={toggleTheme} themeStyles={themeStyles}/>}
+        {isLoading ? (
+        renderSkeleton()
+        ) : ( 
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Link to="/" className="text-5xl font-bold text-white flex items-center" style={{ gap: '10px', position: 'absolute', top: '7rem', left: '50%', transform: 'translateX(-50%)' }}>
+                    <IoFilm size={50} style={{ color: 'white' }} />
+                    TAKE-TWO
+                  </Link>
+                  <LoginCard isLogin={isLogin} toggleAuthPage={toggleAuthPage} />
+                </>
+              }
+            />
+            <Route path="/home" element={<Home theme={theme} currentTheme={currentTheme}/>} />
+            <Route path="/favourites" element={<Favourites theme={theme} currentTheme={currentTheme}/>} />
+            <Route path="/contact" element={<Contact currentTheme={currentTheme}/>} />
+            <Route path="/about" element={<About currentTheme={currentTheme}/>} />
+            <Route path="/search" element={<SearchResults theme={theme} currentTheme={currentTheme}/>} />
+          </Routes>
+        )}
       </div>
   );
 };
