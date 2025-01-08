@@ -255,7 +255,6 @@ h1::after {
   flex-direction: row; 
   align-items: flex-start;
   gap: 10px;
-  margin-top: 10px; 
 }
 
 .action-text {
@@ -263,6 +262,8 @@ h1::after {
   align-items: center;
   gap: 5px;
   justify-content: flex-end; 
+  margin-top: -3px;
+  margin-bottom: -4px;
 }
 
 .carousel-container {
@@ -466,8 +467,8 @@ h1::after {
   display: flex;
   flex-direction: column;
   padding: 30px;
-  align-items: left;
-  justify-content: left;
+  align-items: flex-start; /* Aligns items to the start of the cross-axis (left for column layout) */
+  justify-content: flex-start; /* Aligns items to the start of the main-axis */
   font-size: 25px;
 }
 
@@ -584,4 +585,176 @@ h1::after {
   z-index: 10;
   opacity: 0.9;
   pointer-events: none;
+}
+
+/* profile page */
+.profile-page {
+  height: 80vh;
+  margin: 70px;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: row;
+}
+
+.left-pane {
+  width: 40%;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-button{
+  background-color: #845ec2;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 200px;
+  margin-top: 30px;
+}
+
+.login-button:hover {
+  background-color: #69538d; 
+}
+
+.right-pane {
+  width: 60%;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  gap: 30px
+}
+
+.under-avatar {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.home {
+  margin-top: 20px;
+}
+
+.plan {
+  margin-top: 30px;
+}
+
+h2 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.plan-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.plan-box {
+  font-family: 'Poppins';
+  width: 30%;
+  padding: 20px;
+  border: 1px solid white;
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.plan-box:hover {
+  background-color: #e7e7e7;
+  color: black;
+}
+
+.plan-box h3 {
+  margin: 10px 0;
+}
+
+.plan-box p {
+  font-size: 18px;
+}
+
+.plan-box ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.plan-box ul li {
+  font-size: 14px;
+}
+
+.check-icon {
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: green;
+  font-size: 30px;
+}
+
+/* compare page */
+.compare-page {
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  overflow-x: 'auto' !important;
+}
+
+.compare-results {
+  padding: 10px;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 25px;
+  overflow-x: 'auto' !important;
+}
+
+.compare-page h2 {
+  padding: 30px;
+  font-size: 35px;
+  margin-top: 60px;
+  font-weight: 600;
+}
+
+.custom-table-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  overflow-x: 'auto' !important;
+}
+
+.custom-table {
+  width: 90%;
+  border-collapse: collapse;
+  background-color: #333; 
+  color: white;
+  table-layout: 'auto',
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 10px 15px;
+  text-align: center;
+  border: 1px solid #555;
+}
+
+.custom-table th {
+  background-color: #444;
+  font-weight: bold;
+  align-items: center;
+}
+
+.custom-table tr:nth-child(even) {
+  background-color: #3b3b3b;
 }

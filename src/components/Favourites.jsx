@@ -4,7 +4,7 @@ import MovieModal from '../components2/MovieModal';
 import { useNavigate } from 'react-router-dom';
 
 const Favourites = ({ theme, currentTheme }) => {
-    const [favouriteMovies, setFavouriteMovies] = useState([])
+    const [favouriteMovies, setFavouriteMovies] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -18,7 +18,7 @@ const Favourites = ({ theme, currentTheme }) => {
         setFavouriteMovies(favourites);
     }, []);
 
-    //navigate button
+    //navigate
     const navigate = useNavigate();
     const onAction = () => {
         navigate('/home');
@@ -26,14 +26,6 @@ const Favourites = ({ theme, currentTheme }) => {
 
     const handleModalToggle = () => {
         setModalOpen(!modalOpen);
-    };
-
-    //button styles
-    const buttonStyles = {
-        backgroundColor: currentTheme.color === '#fff' ? '#333' : 'lightgray',
-        color: currentTheme.color === '#fff' ? 'lightgray' : '#333',
-        border: currentTheme.color === '#fff' ? '1px solid white' : '1px solid black',
-        fontSize: '20px'
     };
 
     return(
@@ -57,11 +49,8 @@ const Favourites = ({ theme, currentTheme }) => {
                 <div className='no-favourites'>
                     <h3>Nothing in your favourite list!</h3>
                     <p>Browse more movies and add them to your favourites</p>
-                    <button
-                        className="button"
-                        onClick={onAction}
-                        style={{ ...buttonStyles, width: "200px", marginTop: "10px" }}
-                    >Watch Now!
+                    <button className="login-button" onClick={onAction}>
+                        Watch-Now!
                     </button>
                 </div>
             )}

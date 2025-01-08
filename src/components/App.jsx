@@ -11,10 +11,13 @@ import popbgFlipped from '../assets/popbgFlipped.jpg'
 import NavBar from '../components2/NavBar';
 import SearchResults from "./searchResults";
 import Favourites from "./Favourites";
+import UserProfile from "./UserProfile";
+import Compare from './Compare';
 //skeletons
 import HomeSkeleton from '../components2/Skeletons/HomeSkeleton';
 import FavouritesSkeleton from '../components2/Skeletons/FavouritesSkeleton';
 import SearchResultsSkeleton from '../components2/Skeletons/SearchResultsSkeleton';
+import CompareSkeleton from '../components2/Skeletons/CompareSkeleton';
 
 
 const App = () => {
@@ -26,6 +29,7 @@ const App = () => {
     if (location.pathname === '/favourites') return <FavouritesSkeleton />;
     if (location.pathname === '/home') return <HomeSkeleton />;
     if (location.pathname === '/search') return <SearchResultsSkeleton />
+    if (location.pathname === '/compare') return <CompareSkeleton />
     return null;
   };
 
@@ -112,6 +116,8 @@ const App = () => {
             <Route path="/contact" element={<Contact currentTheme={currentTheme}/>} />
             <Route path="/about" element={<About currentTheme={currentTheme}/>} />
             <Route path="/search" element={<SearchResults theme={theme} currentTheme={currentTheme}/>} />
+            <Route path="/userprofile" element={<UserProfile theme={theme} currentTheme={currentTheme}/>}/>
+            <Route path="/compare" element={<Compare theme={theme} currentTheme={currentTheme}/>}/>
           </Routes>
         )}
       </div>

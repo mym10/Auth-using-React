@@ -40,7 +40,7 @@ const SearchResults = ({theme, currentTheme}) => {
   }, [location.search]);
 
   return (
-    <div className='search-results-home' style={{backgroundColor:currentTheme.backgroundColor, color: currentTheme.color}}>
+    <div className='search-results-home' style={{backgroundColor: currentTheme.backgroundColor, color: currentTheme.color}}>
       <h2>Search Results for "{searchQuery || 'All'}"</h2>
       <div className='search-results'>
         {searchResults.length > 0 ? (

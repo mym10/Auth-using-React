@@ -1,14 +1,25 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Card, CardContent, CardActions, Typography, Modal, Box } from '@mui/material';
-import { IoAdd, IoCaretForward, IoHeart } from "react-icons/io5";
 import Tooltip from '../components2/TooltipComponent';
 import ReactPlayer from 'react-player'
 import { IoClose } from "react-icons/io5";
+import { IoHeartCircleOutline, IoCheckmarkCircleOutline, IoCaretForwardCircleOutline, IoAddCircleOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 const MovieCard = ({movieImage, movieTitle, actionText, onAction, theme, currentTheme, movie, movieTrailer}) => {
+    const navigate = useNavigate();
     const [isClicked, setIsClicked] = useState(() => 
         JSON.parse(localStorage.getItem("favourites"))?.some(fav => fav.Title === movie.Title) || false 
     )
+
+    const [isAdded, setIsAdded] = useState(()=>
+        JSON.parse(localStorage.getItem("compares"))?.some(comp => comp.Title === movie.Title) || false
+    )
+
+    const [compares, setCompares] = useState(JSON.parse(localStorage.getItem("compares")) || []);
+    useEffect(() => {
+        localStorage.setItem("compares", JSON.stringify(compares));
+    }, [compares]);
 
     const handleClick = () => {
         setIsClicked(!isClicked);
@@ -21,15 +32,24 @@ const MovieCard = ({movieImage, movieTitle, actionText, onAction, theme, current
         localStorage.setItem("favourites", JSON.stringify(favourites));
     }
 
+    const handleCompare = () => {
+        setIsAdded(!isAdded);
+        let compares = JSON.parse(localStorage.getItem("compares")) || [];
+        if (!isAdded) {
+            compares.push(movie); 
+        } else {
+            compares = compares.filter(comp => comp.Title !== movie.Title);
+        }
+        setCompares(compares);
+        localStorage.setItem("compares", JSON.stringify(compares));
+    };
+
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleModalOpen = () => {
-        setIsModalOpen(true);
-    };
+    const handleModalOpen = () => setIsModalOpen(true);
+    const handleModalClose = () => setIsModalOpen(false);
 
-    const handleModalClose = () => {
-        setIsModalOpen(false);
-    };
+    const redirectToCompare = () => navigate("/compare");
 
     return (
         <>
@@ -58,15 +78,20 @@ const MovieCard = ({movieImage, movieTitle, actionText, onAction, theme, current
                         <div className="movie-container-actions">
                             <div className="left-icons">
                                 <Tooltip text="Play">
-                                <IoCaretForward size={30} style={{ color: theme === 'light' ? '#333' : 'lightgray', cursor: 'pointer' }}  onClick={handleModalOpen} />
+                                <IoCaretForwardCircleOutline size={30} style={{ color: theme === 'light' ? '#333' : 'lightgray', cursor: 'pointer' }}  onClick={handleModalOpen} />
                                 </Tooltip>
 
-                                <Tooltip text="Add to watchlater">
-                                <IoAdd size={30} style={{ color: theme === 'light' ? '#333' : 'lightgray', cursor: 'pointer' }} />
+                                <Tooltip text={isAdded ? "Remove from compare" : "Add to compare"}>
+                                    {isAdded ? (
+                                        <IoCheckmarkCircleOutline size={30} style={{ color: theme === "light" ? "#333" : "lightgray", cursor: "pointer" }} onClick={handleCompare} />
+                                    ) : (
+                                        <IoAddCircleOutline size={30} style={{ color: theme === "light" ? "#333" : "lightgray", cursor: "pointer" }} onClick={handleCompare} />
+                                    )}
                                 </Tooltip>
+
 
                                 <Tooltip text={isClicked ? 'Remove from favourites' : 'Add to favourites'}>
-                                <IoHeart size={30} style={{ color: isClicked ? '#990f02' : theme === 'light' ? '#333' : 'lightgray', cursor: 'pointer' }} onClick={handleClick} />
+                                <IoHeartCircleOutline size={30} style={{ color: isClicked ? '#990f02' : theme === 'light' ? '#333' : 'lightgray', cursor: 'pointer' }} onClick={handleClick} />
                                 </Tooltip>
                             </div>
                             <div className="action-text">
@@ -101,20 +126,39 @@ const MovieCard = ({movieImage, movieTitle, actionText, onAction, theme, current
                     </div>
                 </CardContent> 
             </Card>
+
+            {compares.length > 1 && compares.length < 5 && (
+                <div
+                    className="compare-popup"
+                    style={{
+                        position: "fixed",
+                        bottom: "20px",
+                        left: "20px",
+                        padding: "10px 20px",
+                        backgroundColor: "#ffff",
+                        color: "#000",
+                        borderRadius: "8px",
+                        cursor: "pointer",
+                        boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
+                    }}
+                    onClick={redirectToCompare}
+                >
+                    What to compare? Click here!
+                </div>
+            )}
+
                 <Modal
-                open={isModalOpen}
-                onClose={handleModalClose}
-                sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}
-                
-            >
+                    open={isModalOpen}
+                    onClose={handleModalClose}
+                    sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}>
                 <Box
                     sx={{
-                        width: '90vw',
-                        height: '90vh',
+                        width: '100vw',
+                        height: '100vh',
                         backgroundColor: theme === 'light' ? '#fff' : '#000',
                         display: 'flex',
                         flexDirection: 'column',
