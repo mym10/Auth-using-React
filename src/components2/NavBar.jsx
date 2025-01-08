@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { IoSearch, IoFilm, IoSunny, IoMoon, IoMenu} from "react-icons/io5";
+import { IoSearch, IoFilm, IoSunny, IoMoon} from "react-icons/io5";
 import Avatar from '@mui/material/Avatar';
-import Tooltip from '../components2/TooltipComponent';
+import EditableAvatar from './AvatarModal';
 
 const Navbar = ({ theme, toggleTheme, themeStyles }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -58,9 +58,7 @@ const Navbar = ({ theme, toggleTheme, themeStyles }) => {
             <Link to="/favourites" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-500 hover:text-white">Favourites</Link>
             <Link to="/about" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-500 hover:text-white">About</Link>
             <Link to="/contact" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-500 hover:text-white">Contact</Link>
-            <Tooltip text={'profile'}>
-            <Link to="/userprofile" className="px-3 py-2"><Avatar style={{ cursor: 'pointer', width: '35px', height: '35px'}}/></Link>
-            </Tooltip>
+            <Link to="/userprofile" className="px-3 py-2"><EditableAvatar width={30} height={30} /></Link>
 
           </div>
           <div className="md:hidden">

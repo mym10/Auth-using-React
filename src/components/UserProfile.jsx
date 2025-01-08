@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Avatar from '@mui/material/Avatar';
 import TextField from '@mui/material/TextField';
 import { Link, useNavigate } from 'react-router-dom';
+import EditableAvatar from '../components2/AvatarModal';
 
 //icons
 import { IoArrowBack } from "react-icons/io5";
@@ -20,6 +20,7 @@ const UserProfile = ({ theme, currentTheme }) => {
     const handleLogout = () => {
         localStorage.removeItem('favourites');
         localStorage.removeItem('compares');
+        localStorage.removeItem('avatarProps');
         navigate('/');
     };
 
@@ -27,7 +28,7 @@ const UserProfile = ({ theme, currentTheme }) => {
     <div className='profile-page'>
         <div className='left-pane'>
             <div className='avatar'>
-                <Avatar style={{width: '200px', height: '200px', }}/>
+                <EditableAvatar width={200} height={200}/>
                 <Link to="/home" className="text-xl flex items-center title home" style={{ gap: '10px', color: currentTheme.color }}>
                 <IoArrowBack size={'25px'} className='icon'/>
                     Back to Home</Link>
