@@ -162,8 +162,14 @@ h1::after {
   justify-content: space-between;
 }
 
+.rating {
+  display: flex;
+  width: 100%;
+  margin-left: 20px;
+}
+
 /*home page*/
-.home-user-watches, .home-recommended, .home-top-10 {
+.home-user-watches, .recently-watched, .trending-movies {
   display: flex;
   flex-direction: row; 
   overflow-x: auto; 
@@ -572,7 +578,7 @@ h1::after {
 
 .tooltip-box {
   position: absolute;
-  bottom: 100%;
+  top: 100%;
   left: 50%;
   transform: translateX(-50%);
   background-color: #000;
@@ -589,6 +595,10 @@ h1::after {
 
 /* profile page */
 /* avatar customization */
+.draw-icon {
+  margin-top: -55px;
+  margin-left: 165px;
+}
 .modal-overlay {
   position: fixed;
   top: 0;

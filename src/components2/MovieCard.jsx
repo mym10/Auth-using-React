@@ -1,17 +1,30 @@
 import React, {useState, useEffect} from "react";
-import { Card, CardContent, CardActions, Typography, Modal, Box } from '@mui/material';
+import { Card, CardContent, CardActions, Typography, Modal, Box, Checkbox } from '@mui/material';
 import Tooltip from '../components2/TooltipComponent';
 import ReactPlayer from 'react-player'
 import { IoClose } from "react-icons/io5";
 import { IoHeartCircleOutline, IoCheckmarkCircleOutline, IoCaretForwardCircleOutline, IoAddCircleOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import Rating from '@mui/material/Rating';
 
-const MovieCard = ({movieImage, movieTitle, actionText, onAction, theme, currentTheme, movie, movieTrailer}) => {
+const getRecentlyWatched = () => {
+    const data = localStorage.getItem("recentlyWatched");
+    return data ? JSON.parse(data) : [];
+  };
+  
+  const addMovieToRecentlyWatched = (movie) => {
+    const recentlyWatched = getRecentlyWatched();
+    // Avoid duplicates
+    const updatedList = recentlyWatched.filter((m) => m.id !== movie.id);
+    updatedList.unshift(movie); // Add the movie to the beginning of the array
+    localStorage.setItem("recentlyWatched", JSON.stringify(updatedList));
+  };
+  
+
+const MovieCard = ({movieImage, movieTitle, actionText, onAction, theme, currentTheme, movie, movieTrailer, rating, onPlay}) => {
     const navigate = useNavigate();
-    const [isClicked, setIsClicked] = useState(() => 
-        JSON.parse(localStorage.getItem("favourites"))?.some(fav => fav.Title === movie.Title) || false 
-    )
-
+    
+    //add to compare
     const [isAdded, setIsAdded] = useState(()=>
         JSON.parse(localStorage.getItem("compares"))?.some(comp => comp.Title === movie.Title) || false
     )
@@ -20,6 +33,23 @@ const MovieCard = ({movieImage, movieTitle, actionText, onAction, theme, current
     useEffect(() => {
         localStorage.setItem("compares", JSON.stringify(compares));
     }, [compares]);
+
+    const handleCompare = () => {
+        let compares = JSON.parse(localStorage.getItem("compares")) || [];
+        if (!isAdded) {
+            compares.push(movie); 
+        } else {
+            compares = compares.filter(comp => comp.Title !== movie.Title);
+        }
+        setIsAdded(!isAdded);
+        setCompares(compares);
+        localStorage.setItem("compares", JSON.stringify(compares));
+    };
+
+    //add to favourites
+    const [isClicked, setIsClicked] = useState(() => 
+        JSON.parse(localStorage.getItem("favourites"))?.some(fav => fav.Title === movie.Title) || false 
+    )
 
     const handleClick = () => {
         setIsClicked(!isClicked);
@@ -32,24 +62,32 @@ const MovieCard = ({movieImage, movieTitle, actionText, onAction, theme, current
         localStorage.setItem("favourites", JSON.stringify(favourites));
     }
 
-    const handleCompare = () => {
-        setIsAdded(!isAdded);
-        let compares = JSON.parse(localStorage.getItem("compares")) || [];
-        if (!isAdded) {
-            compares.push(movie); 
+    //add to watch later
+    const [isWatchLater, setIsWatchLater] = useState(() => 
+        JSON.parse(localStorage.getItem("watchLater"))?.some(wl => wl.Title === movie.Title) || false 
+    )
+
+    const handleWatchlater = () => {
+        setIsWatchLater(!isWatchLater);
+        let watchLater = JSON.parse(localStorage.getItem("watchLater")) || [];
+        if (!isWatchLater) {
+            watchLater.push(movie); //add to watchLater
         } else {
-            compares = compares.filter(comp => comp.Title !== movie.Title);
+            watchLater = watchLater.filter(wl => wl.Title !== movie.Title); //remove from watchLater
         }
-        setCompares(compares);
-        localStorage.setItem("compares", JSON.stringify(compares));
-    };
+        localStorage.setItem("watchLater", JSON.stringify(watchLater));
+    }
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleModalOpen = () => setIsModalOpen(true);
+    const handleModalOpen = () => {setIsModalOpen(true)};
     const handleModalClose = () => setIsModalOpen(false);
 
     const redirectToCompare = () => navigate("/compare");
+    //on play
+    if (onPlay) {
+        onPlay(movie); // Add movie to recently watched
+    }
 
     return (
         <>
@@ -61,6 +99,14 @@ const MovieCard = ({movieImage, movieTitle, actionText, onAction, theme, current
             }}>
                 <CardContent sx={{ "&:last-child": { padding: 0} }}>
                     <div className="movie-container">
+                        <Checkbox  style={{marginLeft: '260px', marginBottom: '-35px', padding: '-20px'}}  sx={{
+                            color: 'white',
+                            '&.Mui-checked': {
+                            color: 'white',
+                            },
+                        }}  
+                        checked={isAdded}
+                        onChange={handleCompare} />
                         <img src={movieImage} alt={movieTitle} />
                         <Typography variant="h5" component="h3" sx={{ 
                             textAlign: 'left', 
@@ -75,25 +121,30 @@ const MovieCard = ({movieImage, movieTitle, actionText, onAction, theme, current
                             }}>
                             {movieTitle}
                         </Typography>
+                        <div className="rating">
+                            {rating ? <Rating value={rating / 2} readOnly/> : null}
+                        </div>
                         <div className="movie-container-actions">
                             <div className="left-icons">
                                 <Tooltip text="Play">
                                 <IoCaretForwardCircleOutline size={30} style={{ color: theme === 'light' ? '#333' : 'lightgray', cursor: 'pointer' }}  onClick={handleModalOpen} />
                                 </Tooltip>
 
-                                <Tooltip text={isAdded ? "Remove from compare" : "Add to compare"}>
-                                    {isAdded ? (
-                                        <IoCheckmarkCircleOutline size={30} style={{ color: theme === "light" ? "#333" : "lightgray", cursor: "pointer" }} onClick={handleCompare} />
+                                <Tooltip text={isWatchLater ? "Remove from watch later" : "Add to watch later"}>
+                                <div onClick={handleWatchlater} style={{display: "inline-flex", alignItems: "center", cursor: "pointer"}}>
+                                    {isWatchLater ? (
+                                    <IoCheckmarkCircleOutline size={30} style={{ color: theme === "light" ? "#333" : "lightgray"}}/>
                                     ) : (
-                                        <IoAddCircleOutline size={30} style={{ color: theme === "light" ? "#333" : "lightgray", cursor: "pointer" }} onClick={handleCompare} />
+                                    <IoAddCircleOutline size={30} style={{ color: theme === "light" ? "#333" : "lightgray"}}/>
                                     )}
+                                </div>
                                 </Tooltip>
-
 
                                 <Tooltip text={isClicked ? 'Remove from favourites' : 'Add to favourites'}>
                                 <IoHeartCircleOutline size={30} style={{ color: isClicked ? '#990f02' : theme === 'light' ? '#333' : 'lightgray', cursor: 'pointer' }} onClick={handleClick} />
                                 </Tooltip>
                             </div>
+                            
                             <div className="action-text">
                                 <CardActions sx={{ justifyContent: 'flex-end' }}>
                                     <Typography 

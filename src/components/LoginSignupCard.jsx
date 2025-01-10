@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function LoginCard({isLogin, toggleAuthPage}) {
+function LoginCard({isLogin, toggleAuthPage, setCurrentUser, setCurrentEmail}) {
     const navigate = useNavigate();
 
     //login
@@ -19,7 +19,7 @@ function LoginCard({isLogin, toggleAuthPage}) {
     //credential management
     const [cred, setCred] = useState(() => {
         const savedCred = localStorage.getItem("cred");
-        return savedCred ? JSON.parse(savedCred) : { users: [{ username: "admin", password: "Password@123" }]};
+        return savedCred ? JSON.parse(savedCred) : { users: [{ username: "admin", email: "admin@50.com", password: "Password@123" }]};
     });
 
     //update localStorage
@@ -47,6 +47,8 @@ function LoginCard({isLogin, toggleAuthPage}) {
             (user) => user.username === loginUsername && user.password === loginPassword
         );
         if (user) {
+            setCurrentUser(user.username);
+            setCurrentEmail(user.email)
             toast.success("Login successful!");
             setTimeout(() => navigate("/home"), 500);
         } else {
@@ -66,11 +68,13 @@ function LoginCard({isLogin, toggleAuthPage}) {
             toast.warn("Username already exists!");
             return;
         }
-        const newUser = { username: signupUsername, password: signupPassword, email };
+        const newUser = { username: signupUsername, password: signupPassword, email: email };
         setCred((prevCred) => ({
             ...prevCred,
             users: [...prevCred.users, newUser],
         }));
+        setCurrentUser(signupUsername); 
+        setCurrentEmail(email)
         toast.success("Account created successfully!");
         setTimeout(() => navigate("/home"), 500);
     };

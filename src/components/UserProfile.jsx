@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import { Link, useNavigate } from 'react-router-dom';
 import EditableAvatar from '../components2/AvatarModal';
+import Tooltip  from '../components2/TooltipComponent';
+import { SketchPicker } from "react-color";
 
 //icons
 import { IoArrowBack } from "react-icons/io5";
 import { MdOutlineDevices, MdCottage, MdCoPresent } from "react-icons/md";
 import { CheckCircle } from '@mui/icons-material';
+import { MdDraw } from "react-icons/md";
 
 
-const UserProfile = ({ theme, currentTheme }) => {
+const UserProfile = ({ theme, currentTheme, avatarProps, setAvatarProps, currentUser, currentEmail }) => {
     const [selectedPlan, setSelectedPlan] = useState('free');
     const navigate = useNavigate();
 
@@ -21,25 +24,45 @@ const UserProfile = ({ theme, currentTheme }) => {
         localStorage.removeItem('favourites');
         localStorage.removeItem('compares');
         localStorage.removeItem('avatarProps');
+        localStorage.removeItem('watchLater');
         navigate('/');
+    };
+
+    //avatar settings
+    const [open, setOpen] = useState(false);
+    const handleClickOpen = () => setOpen(true);
+
+    const handleClose = () => setOpen(false);
+
+    const handleSave = () => {
+        setAvatarProps({ ...avatarProps });
+        setOpen(false);
+    };
+
+    const handleChange = (prop) => (event) => {
+        setAvatarProps({ ...avatarProps, [prop]: event.target.value });
+    };
+
+    const handleColorChange = (color) => {
+        setAvatarProps({ ...avatarProps, color: color.hex });
     };
 
   return (
     <div className='profile-page'>
         <div className='left-pane'>
             <div className='avatar'>
-                <EditableAvatar width={200} height={200}/>
+                <EditableAvatar width={200} height={200} savedAvatarProps={avatarProps}/><Tooltip text={'edit'}><MdDraw size={30} className='draw-icon' fill='white' onClick={handleClickOpen}/></Tooltip>
                 <Link to="/home" className="text-xl flex items-center title home" style={{ gap: '10px', color: currentTheme.color }}>
                 <IoArrowBack size={'25px'} className='icon'/>
                     Back to Home</Link>
             </div>
             <div className='under-avatar'>
-                <Link to="#" className="text-xl flex items-center title" style={{ gap: '10px', color: currentTheme.color }}>
+                <Link to="/about" className="text-xl flex items-center title" style={{ gap: '10px', color: currentTheme.color }}>
                 <MdCottage size={'25px'} className='icon'/>
-                Overview</Link>
-                <Link to="#" className="text-xl flex items-center title" style={{ gap: '10px', color: currentTheme.color }}>
+                About</Link>
+                <Link to="/contact" className="text-xl flex items-center title" style={{ gap: '10px', color: currentTheme.color }}>
                 <MdOutlineDevices size={'25px'} className='icon'/>
-                Devices</Link>
+                Contact Us</Link>
                 <Link to="#" className="text-xl flex items-center title" style={{ gap: '10px', color: currentTheme.color }}>
                 <MdCoPresent size={'25px'} className='icon'/>
                 Profiles</Link>
@@ -54,7 +77,7 @@ const UserProfile = ({ theme, currentTheme }) => {
                 <TextField
                     id="standard-read-only-input"
                     label="Username"
-                    defaultValue="User1" //username
+                    defaultValue={currentUser ||"User"}//username
                     variant="standard"
                     slotProps={{
                         input: {
@@ -72,7 +95,7 @@ const UserProfile = ({ theme, currentTheme }) => {
                     <TextField
                     id="standard-read-only-input"
                     label="Email-id"
-                    defaultValue="user1010@gmail.com" //email
+                    defaultValue={currentEmail || "user1010@gmail.com"} //email
                     variant="standard"
                     slotProps={{
                         input: {
@@ -97,6 +120,7 @@ const UserProfile = ({ theme, currentTheme }) => {
                                 key={plan}
                                 className={`plan-box ${selectedPlan === plan ? 'selected' : ''}`}
                                 onClick={() => handlePlanChange(plan)}
+                                value={plan}
                             >
                                 <h3>{plan.charAt(0).toUpperCase() + plan.slice(1)}</h3>
                                 <p>{plan === 'free' ? '₹0/month' : plan === 'premium' ? '₹149/month' : '₹199/month'}</p>
@@ -112,6 +136,65 @@ const UserProfile = ({ theme, currentTheme }) => {
                 </div>
             </div>
         </div>
+        {open && (
+            <div className="modal-overlay">
+            <div className="modal-content">
+                <h2>Edit Avatar</h2>
+                {/* shape */}
+                <div className="form-group">
+                <label>
+                    <input
+                    type="radio"
+                    name="shape"
+                    value="circle"
+                    checked={avatarProps.shape === "circle"}
+                    onChange={handleChange("shape")}
+                    />
+                    Circle
+                </label>
+                <label>
+                    <input
+                    type="radio"
+                    name="shape"
+                    value="square"
+                    checked={avatarProps.shape === "square"}
+                    onChange={handleChange("shape")}
+                    />
+                    Square
+                </label>
+                </div>
+
+                {/* color */}
+                <div className="form-group-color">
+                <label>Color</label>
+                    <div className="color-picker-popover">
+                    <div className="color-picker-cover"  />
+                    <SketchPicker color={avatarProps.color} onChange={handleColorChange} />
+                    </div>
+                </div>
+
+                {/* text */}
+                <div className="form-group">
+                <label>Text</label>
+                <input
+                    type="text"
+                    value={avatarProps.text}
+                    onChange={handleChange("text")}
+                />
+                </div>
+
+                {/* buttons */}
+                <div className="modal-actions">
+                <button className="login-button" onClick={handleClose}>
+                    Cancel
+                </button>
+                <button className="login-button" onClick={handleSave}>
+                    Save
+                </button>
+                </div>
+            </div>
+            </div>
+        )}
     </div>
   );
 }

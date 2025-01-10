@@ -35,6 +35,11 @@ const Home = ({theme, currentTheme}) => {
         }
         return shuffledArray;
       };
+
+    //trending movies based on the descending order of imdbRating
+    const desIMDB = (array) => {
+        return array.sort((a, b) => b.imdbRating - a.imdbRating);
+    }
     //-------------------------- 
     //drop down
     const [selectedGenre, setSelectedGenre] = useState("Select Genre");
@@ -121,9 +126,9 @@ const Home = ({theme, currentTheme}) => {
                 ))}
                 </div>
                 <div className='bar-title' style={{ borderBottom: ` ${theme === 'light' ? '#ccc' : '#444'}` }}>
-                <h2>Recommended Movies</h2><IoChevronForwardSharp size={35} style={{ color: theme === 'light' ? '#000' : 'lightgray', cursor: 'pointer' }}/>
+                <h2>Recently Watched Movies</h2><IoChevronForwardSharp size={35} style={{ color: theme === 'light' ? '#000' : 'lightgray', cursor: 'pointer' }}/>
                 </div>
-                <div className='home-recommended'>
+                <div className='recently-watched'>
                 {shuffleArray(movies).map((movie, index) => (
                     <React.Fragment key={index}>
                         <MovieCard
@@ -131,7 +136,7 @@ const Home = ({theme, currentTheme}) => {
                             movieImage={movie.Images[0]}
                             movieTitle={movie.Title}
                             actionText="View Details"
-                            onAction={() => handleMovieAction(movie)}
+                            onAction={() => handleMovieAction(movie)} //if this is triggered, not only open a new modal to play the movie but also add it to the recently watched
                             theme = {theme}
                             currentTheme={currentTheme}
                             movieTrailer={movie.Trailer}
@@ -140,10 +145,10 @@ const Home = ({theme, currentTheme}) => {
                 ))}
                 </div>
                 <div className='bar-title' style={{ borderBottom: `${theme === 'light' ? '#ccc' : '#444'}` }}>
-                <h2>Top 10 in India</h2><IoChevronForwardSharp size={35} style={{ color: theme === 'light' ? '#000' : 'lightgray', cursor: 'pointer' }}/>
+                <h2>Trending in India</h2><IoChevronForwardSharp size={35} style={{ color: theme === 'light' ? '#000' : 'lightgray', cursor: 'pointer' }}/>
                 </div>
-                <div className='home-top-10'>
-                {shuffleArray(movies).map((movie, index) => (
+                <div className='trending-movies'>
+                {desIMDB(movies).map((movie, index) => (
                     <React.Fragment key={index}>
                         <MovieCard
                             movie = {movie}
@@ -154,6 +159,7 @@ const Home = ({theme, currentTheme}) => {
                             theme = {theme}
                             currentTheme={currentTheme}
                             movieTrailer={movie.Trailer}
+                            rating={movie.imdbRating}
                         />
                     </React.Fragment>
                 ))}
