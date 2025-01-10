@@ -44,14 +44,31 @@ const App = () => {
 
   //login/signup
   const [isLogin, setIsLogin] = useState(true);
-  const [currentUser, setCurrentUser] = useState(null);
-  const [currentEmail, setCurrentEmail] = useState(null)
+  const [currentUser, setCurrentUser] = useState(() => {
+    const savedUser = localStorage.getItem("currentUser");
+    return savedUser || ""; 
+  });
+  
+  const [currentEmail, setCurrentEmail] = useState(() => {
+    const savedEmail = localStorage.getItem("currentEmail");
+    return savedEmail || "";
+  });
+
+  useEffect(() => {
+    if (currentUser) {
+      localStorage.setItem("currentUser", currentUser);
+    }
+  }, [currentUser]);
+  
+  useEffect(() => {
+    if (currentEmail) {
+      localStorage.setItem("currentEmail", currentEmail);
+    }
+  }, [currentEmail]);
 
   const toggleAuthPage = () => {
     setIsLogin(!isLogin);
   };
-
-  //const toggleAuthPage = () => setIsLogin((prev) => !prev);
 
   useEffect(() => {
     if (location.pathname !== "/") {
@@ -96,15 +113,14 @@ const App = () => {
     return savedAvatarProps ? JSON.parse(savedAvatarProps) : {
       shape: "circle",
       color: "#b385de",
-      text: currentUser,
+      text: currentUser || 'User',
     };
   });
 
   useEffect(() => {
-    // Update the avatar text whenever currentUser changes
     setAvatarProps((prevProps) => ({
       ...prevProps,
-      text: currentUser || prevProps.text,
+      text: currentUser,
     }));
   }, [currentUser]);
 
@@ -124,7 +140,7 @@ const App = () => {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}>
-        {showNavbar && <NavBar theme={theme} toggleTheme={toggleTheme} themeStyles={themeStyles} avatarProps={avatarProps}/>}
+        {showNavbar && <NavBar theme={theme} toggleTheme={toggleTheme} themeStyles={themeStyles} avatarProps={avatarProps}/>} 
         {isLoading ? (
         renderSkeleton()
         ) : ( 

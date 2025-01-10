@@ -49,6 +49,8 @@ function LoginCard({isLogin, toggleAuthPage, setCurrentUser, setCurrentEmail}) {
         if (user) {
             setCurrentUser(user.username);
             setCurrentEmail(user.email)
+            localStorage.setItem("currentUser", user.username);
+            localStorage.setItem("currentEmail", user.email);
             toast.success("Login successful!");
             setTimeout(() => navigate("/home"), 500);
         } else {

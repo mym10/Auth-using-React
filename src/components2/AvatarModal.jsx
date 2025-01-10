@@ -1,8 +1,9 @@
 import React from "react";
 
-const EditableAvatar = ({width, height, savedAvatarProps = {}}) => {  
+const EditableAvatar = ({width, height, currentUser,  savedAvatarProps = {}}) => {     
+    const { shape = "circle", color = "#b385de", text = currentUser || "User" } = savedAvatarProps;
+    const displayText = text ? text[0].toUpperCase() : "U";
     
-    const { shape = "circle", color = "#b385de", text = "User" } = savedAvatarProps;
     return (
         <div>
             <div
@@ -16,7 +17,7 @@ const EditableAvatar = ({width, height, savedAvatarProps = {}}) => {
                 borderRadius: shape === "circle" ? "50%" : "10%",
                 cursor: "pointer",
                 }}            >
-                <span style={{ color: "white", fontSize: width === 30 ? "20px" : "30px" }}>{width === 30 ? text[0] : text}</span>
+                <span style={{ color: "white", fontSize: width === 30 ? "20px" : "30px" }}>{width === 30 ? displayText : text}</span>
             </div>
         </div>
     );

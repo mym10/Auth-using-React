@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoSearch, IoFilm, IoSunny, IoMoon} from "react-icons/io5";
-import Avatar from '@mui/material/Avatar';
 import EditableAvatar from './AvatarModal';
 
 const Navbar = ({ theme, toggleTheme, themeStyles, avatarProps }) => {
@@ -57,8 +56,6 @@ const Navbar = ({ theme, toggleTheme, themeStyles, avatarProps }) => {
             <Link to="/home" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-500 hover:text-white">Home</Link>
             <Link to="/favourites" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-500 hover:text-white">Favourites</Link>
             <Link to="/watchlater" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-500 hover:text-white">Watch Later</Link>
-            {/* <Link to="/about" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-500 hover:text-white">About</Link>
-            <Link to="/contact" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-500 hover:text-white">Contact</Link> */}
             <Link to="/userprofile" className="px-3 py-2"><EditableAvatar width={30} height={30} savedAvatarProps={avatarProps}/></Link>
 
           </div>

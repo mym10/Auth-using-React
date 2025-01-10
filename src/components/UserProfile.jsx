@@ -25,6 +25,8 @@ const UserProfile = ({ theme, currentTheme, avatarProps, setAvatarProps, current
         localStorage.removeItem('compares');
         localStorage.removeItem('avatarProps');
         localStorage.removeItem('watchLater');
+        localStorage.removeItem("currentUser");
+        localStorage.removeItem("currentEmail");
         navigate('/');
     };
 
@@ -51,7 +53,7 @@ const UserProfile = ({ theme, currentTheme, avatarProps, setAvatarProps, current
     <div className='profile-page'>
         <div className='left-pane'>
             <div className='avatar'>
-                <EditableAvatar width={200} height={200} savedAvatarProps={avatarProps}/><Tooltip text={'edit'}><MdDraw size={30} className='draw-icon' fill='white' onClick={handleClickOpen}/></Tooltip>
+                <EditableAvatar width={200} height={200} currentUser={currentUser} savedAvatarProps={avatarProps}/><Tooltip text={'edit'}><MdDraw size={30} className='draw-icon' fill='white' onClick={handleClickOpen}/></Tooltip>
                 <Link to="/home" className="text-xl flex items-center title home" style={{ gap: '10px', color: currentTheme.color }}>
                 <IoArrowBack size={'25px'} className='icon'/>
                     Back to Home</Link>
