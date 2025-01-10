@@ -4,10 +4,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import EditableAvatar from '../components2/AvatarModal';
 import Tooltip  from '../components2/TooltipComponent';
 import { SketchPicker } from "react-color";
+import CalendarComponent from '../components2/CalendarComponent'
 
 //icons
-import { IoArrowBack } from "react-icons/io5";
-import { MdOutlineDevices, MdCottage, MdCoPresent } from "react-icons/md";
+import { IoArrowBack, IoToday } from "react-icons/io5";
+import { MdOutlineDevices, MdCottage } from "react-icons/md";
 import { CheckCircle } from '@mui/icons-material';
 import { MdDraw } from "react-icons/md";
 
@@ -27,6 +28,7 @@ const UserProfile = ({ theme, currentTheme, avatarProps, setAvatarProps, current
         localStorage.removeItem('watchLater');
         localStorage.removeItem("currentUser");
         localStorage.removeItem("currentEmail");
+        localStorage.removeItem('recently-watched');
         navigate('/');
     };
 
@@ -49,6 +51,16 @@ const UserProfile = ({ theme, currentTheme, avatarProps, setAvatarProps, current
         setAvatarProps({ ...avatarProps, color: color.hex });
     };
 
+    const [modalOpen, setModalOpen] = useState(false);
+    
+    const handleAction = () => {
+        setModalOpen(true);
+    };
+
+    const handleModalToggle = () => {
+        setModalOpen(!modalOpen);
+    };
+
   return (
     <div className='profile-page'>
         <div className='left-pane'>
@@ -65,9 +77,9 @@ const UserProfile = ({ theme, currentTheme, avatarProps, setAvatarProps, current
                 <Link to="/contact" className="text-xl flex items-center title" style={{ gap: '10px', color: currentTheme.color }}>
                 <MdOutlineDevices size={'25px'} className='icon'/>
                 Contact Us</Link>
-                <Link to="#" className="text-xl flex items-center title" style={{ gap: '10px', color: currentTheme.color }}>
-                <MdCoPresent size={'25px'} className='icon'/>
-                Profiles</Link>
+                <Link to="#" className="text-xl flex items-center title" style={{ gap: '10px', color: currentTheme.color }} onClick={handleAction}>
+                <IoToday size={'25px'} className='icon' />
+                Calender</Link>
             </div> 
             <button className="login-button" onClick={handleLogout}>
                 Logout
@@ -138,6 +150,13 @@ const UserProfile = ({ theme, currentTheme, avatarProps, setAvatarProps, current
                 </div>
             </div>
         </div>
+        {modalOpen && (
+            <CalendarComponent
+                open={modalOpen}
+                onClose={handleModalToggle}
+            />
+        )}
+        
         {open && (
             <div className="modal-overlay">
             <div className="modal-content">

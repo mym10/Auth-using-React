@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MovieCard from '../components2/MovieCard';
 import movies from '../movies.json';
@@ -66,6 +66,30 @@ const Home = ({theme, currentTheme}) => {
         setDrawerOpen(isOpen);
     };
 
+    //recently watched movies
+    const [recentlyWatchedMovies, setRecentlyWatchedMovies] = useState(() => {
+        const storedMovies = localStorage.getItem("recently-watched");
+        return storedMovies ? JSON.parse(storedMovies) : [];
+    });
+
+    useEffect(() => {
+        const storedMovies = localStorage.getItem("recently-watched");
+        if (storedMovies) {
+          setRecentlyWatchedMovies(JSON.parse(storedMovies));
+        }
+    }, []);
+
+    const addMovieToRecentlyWatched = (movie) => {
+        let recentlyWatched = JSON.parse(localStorage.getItem("recently-watched")) || [];
+        const isDuplicate = recentlyWatched.some(rw => rw.Title === movie.Title);
+
+        if (!isDuplicate) {
+            recentlyWatched = [movie, ...recentlyWatched];
+            localStorage.setItem("recently-watched", JSON.stringify(recentlyWatched));
+            setRecentlyWatchedMovies(recentlyWatched);
+        }
+    };
+
     return (
         <div className='home-page' style={{backgroundColor: currentTheme.background, color: currentTheme.color}}>
             <div className="carousel-container">
@@ -121,6 +145,7 @@ const Home = ({theme, currentTheme}) => {
                             theme = {theme}
                             currentTheme={currentTheme}
                             movieTrailer={movie.Trailer}
+                            addMovieToRecentlyWatched={addMovieToRecentlyWatched}
                         />
                     </React.Fragment>
                 ))}
@@ -129,7 +154,7 @@ const Home = ({theme, currentTheme}) => {
                 <h2>Recently Watched Movies</h2><IoChevronForwardSharp size={35} style={{ color: theme === 'light' ? '#000' : 'lightgray', cursor: 'pointer' }}/>
                 </div>
                 <div className='recently-watched'>
-                {shuffleArray(movies).map((movie, index) => (
+                {recentlyWatchedMovies.length > 1 ? (recentlyWatchedMovies.map((movie, index) => (
                     <React.Fragment key={index}>
                         <MovieCard
                             movie = {movie}
@@ -140,9 +165,10 @@ const Home = ({theme, currentTheme}) => {
                             theme = {theme}
                             currentTheme={currentTheme}
                             movieTrailer={movie.Trailer}
+                            addMovieToRecentlyWatched={addMovieToRecentlyWatched}
                         />
                     </React.Fragment>
-                ))}
+                ))) : <p>Keep watching to display your movies.</p>}
                 </div>
                 <div className='bar-title' style={{ borderBottom: `${theme === 'light' ? '#ccc' : '#444'}` }}>
                 <h2>Trending in India</h2><IoChevronForwardSharp size={35} style={{ color: theme === 'light' ? '#000' : 'lightgray', cursor: 'pointer' }}/>
@@ -160,6 +186,7 @@ const Home = ({theme, currentTheme}) => {
                             currentTheme={currentTheme}
                             movieTrailer={movie.Trailer}
                             rating={movie.imdbRating}
+                            addMovieToRecentlyWatched={addMovieToRecentlyWatched}
                         />
                     </React.Fragment>
                 ))}
@@ -197,7 +224,7 @@ const Home = ({theme, currentTheme}) => {
                     <IoChatbubbleSharp size={25} />
                 </Fab>
                 <ChatDrawer open={drawerOpen} toggleDrawer={toggleDrawer} />
-                </div>
+            </div>
         </div>
     );
 };

@@ -5,23 +5,9 @@ import ReactPlayer from 'react-player'
 import { IoClose } from "react-icons/io5";
 import { IoHeartCircleOutline, IoCheckmarkCircleOutline, IoCaretForwardCircleOutline, IoAddCircleOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import Rating from '@mui/material/Rating';
+import Rating from '@mui/material/Rating';  
 
-const getRecentlyWatched = () => {
-    const data = localStorage.getItem("recentlyWatched");
-    return data ? JSON.parse(data) : [];
-  };
-  
-  const addMovieToRecentlyWatched = (movie) => {
-    const recentlyWatched = getRecentlyWatched();
-    // Avoid duplicates
-    const updatedList = recentlyWatched.filter((m) => m.id !== movie.id);
-    updatedList.unshift(movie); // Add the movie to the beginning of the array
-    localStorage.setItem("recentlyWatched", JSON.stringify(updatedList));
-  };
-  
-
-const MovieCard = ({movieImage, movieTitle, actionText, onAction, theme, currentTheme, movie, movieTrailer, rating, onPlay}) => {
+const MovieCard = ({movieImage, movieTitle, actionText, onAction, theme, currentTheme, movie, movieTrailer, rating, addMovieToRecentlyWatched}) => {
     const navigate = useNavigate();
     
     //add to compare
@@ -78,17 +64,24 @@ const MovieCard = ({movieImage, movieTitle, actionText, onAction, theme, current
         localStorage.setItem("watchLater", JSON.stringify(watchLater));
     }
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    //recently watched
+    const [isModalOpen, setIsModalOpen] = useState(() => {
+        const storedMovies = localStorage.getItem("recently-watched");
+        const recentlyWatched = storedMovies ? JSON.parse(storedMovies) : [];
+        return recentlyWatched.some(rw => rw.Title === movie.Title) ? false : false;
+    });
+    
+    
+    const handleModalOpen = () => {
+        setIsModalOpen(true);
+    };
 
-    const handleModalOpen = () => {setIsModalOpen(true)};
-    const handleModalClose = () => setIsModalOpen(false);
-
-    const redirectToCompare = () => navigate("/compare");
-    //on play
-    if (onPlay) {
-        onPlay(movie); // Add movie to recently watched
+    const handleModalClose = () => {
+        setIsModalOpen(false);
+        addMovieToRecentlyWatched(movie);
     }
 
+    const redirectToCompare = () => navigate("/compare");
     return (
         <>
             <Card sx={{ width: 300, 
