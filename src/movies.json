@@ -27,7 +27,8 @@
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMTMxOTEwNDcxN15BMl5BanBnXkFtZTcwOTg0MTUzNA@@._V1_SX1777_CR0,0,1777,999_AL_.jpg",
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMTYxMDg1Nzk1MV5BMl5BanBnXkFtZTcwMDk0MTUzNA@@._V1_SX1500_CR0,0,1500,999_AL_.jpg"
       ],
-      "Trailer": "https://youtu.be/d9MyW72ELq0?si=eqaFxOmYgzze9-JT"
+      "Trailer": "https://youtu.be/d9MyW72ELq0?si=eqaFxOmYgzze9-JT",
+      "TrailerDuration":"148"
     },
     {
       "Title": "I Am Legend",
@@ -56,7 +57,8 @@
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMTc5MDM1OTU5OV5BMl5BanBnXkFtZTYwMjA0Nzc4._V1_.jpg",
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMTA0MTI2NjMzMzFeQTJeQWpwZ15BbWU2MDMwNDc3OA@@._V1_.jpg"
       ],
-      "Trailer": "https://youtu.be/sFNPNT_4Qww?si=u5LVQaI99es3oP_P"
+      "Trailer": "https://youtu.be/sFNPNT_4Qww?si=u5LVQaI99es3oP_P",
+      "TrailerDuration": "119"
     },
     {
       "Title": "300",
@@ -84,7 +86,8 @@
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMTQwNTgyNTMzNF5BMl5BanBnXkFtZTcwNDA2NTIyMw@@._V1_SX1777_CR0,0,1777,935_AL_.jpg",
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMTc0MjQzOTEwMV5BMl5BanBnXkFtZTcwMzE2NTIyMw@@._V1_SX1777_CR0,0,1777,947_AL_.jpg"
       ],
-      "Trailer": "https://youtu.be/UrIbxk7idYA?si=yjAJ-ad_rc-DTgHf"
+      "Trailer": "https://youtu.be/UrIbxk7idYA?si=yjAJ-ad_rc-DTgHf",
+      "TrailerDuration": "158"
     },
     {
       "Title": "The Avengers",
@@ -114,7 +117,8 @@
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMTQ4NzM2Mjc5MV5BMl5BanBnXkFtZTcwMTkwOTY3Nw@@._V1_SX1777_CR0,0,1777,999_AL_.jpg",
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMTc3MzQ3NjA5N15BMl5BanBnXkFtZTcwMzY5OTY3Nw@@._V1_SX1777_CR0,0,1777,999_AL_.jpg"
       ],
-      "Trailer": "https://youtu.be/eOrNdBpGMv8?si=eFPh153sTh0nbzop"
+      "Trailer": "https://youtu.be/eOrNdBpGMv8?si=eFPh153sTh0nbzop",
+      "TrailerDuration": "124"
     },
     {
       "Title": "The Wolf of Wall Street",
@@ -144,7 +148,8 @@
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMTg3MTY4NDk4Nl5BMl5BanBnXkFtZTgwNjc0MzQ4MDE@._V1_SX1500_CR0,0,1500,999_AL_.jpg",
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMTgzMTg4MDI0Ml5BMl5BanBnXkFtZTgwOTY0MzQ4MDE@._V1_SY1000_CR0,0,1553,1000_AL_.jpg"
       ],
-      "Trailer": "https://youtu.be/iszwuX1AK6A?si=QMyT2bu_4CUuwYD4"
+      "Trailer": "https://youtu.be/iszwuX1AK6A?si=QMyT2bu_4CUuwYD4",
+      "TrailerDuration": "133"
     },
     {
       "Title": "Interstellar",
@@ -174,7 +179,8 @@
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMzE3MTM0MTc3Ml5BMl5BanBnXkFtZTgwMDIyODgxMzE@._V1_SX1500_CR0,0,1500,999_AL_.jpg",
         "https://images-na.ssl-images-amazon.com/images/M/MV5BNjYzNjE2NDk3N15BMl5BanBnXkFtZTgwNzEyODgxMzE@._V1_SX1500_CR0,0,1500,999_AL_.jpg"
       ],
-      "Trailer": "https://youtu.be/zSWdZVtXT7E?si=d_fOk-eT_7gddoz8"
+      "Trailer": "https://youtu.be/zSWdZVtXT7E?si=d_fOk-eT_7gddoz8",
+      "TrailerDuration": "174"
     },
     {
       "Title": "Game of Thrones",
@@ -205,7 +211,8 @@
         "https://images-na.ssl-images-amazon.com/images/M/MV5BNjZjNWIzMzQtZWZjYy00ZTkwLWJiMTYtOWRkZDBhNWJhY2JmXkEyXkFqcGdeQXVyMjk3NTUyOTc@._V1_SX1777_CR0,0,1777,999_AL_.jpg",
         "https://images-na.ssl-images-amazon.com/images/M/MV5BNTMyMTRjZWEtM2UxMS00ZjU5LWIxMTYtZDA5YmJhZmRjYTc4XkEyXkFqcGdeQXVyMjk3NTUyOTc@._V1_SX1777_CR0,0,1777,999_AL_.jpg"
       ],
-      "Trailer": "https://youtu.be/6nKREX6YeCY?si=RYSTUq_pmsjTM39n"
+      "Trailer": "https://youtu.be/6nKREX6YeCY?si=RYSTUq_pmsjTM39n",
+      "TrailerDuration": "120"
     },
     {
       "Title": "Vikings",
@@ -236,7 +243,8 @@
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMTQ2NTQ2MDA3NF5BMl5BanBnXkFtZTgwODkxMDUxODE@._V1_SY1000_SX1500_AL_.jpg",
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMTcxOTQ3NTA5N15BMl5BanBnXkFtZTgwMzExMDUxODE@._V1_SY1000_SX1500_AL_.jpg"
       ],
-      "Trailer": "https://youtu.be/Yi4YnwFT7Gk?si=SmOGpDxw2xqH5vXc"
+      "Trailer": "https://youtu.be/Yi4YnwFT7Gk?si=SmOGpDxw2xqH5vXc",
+      "TrailerDuration": "155"
     },
     {
       "Title": "Gotham",
@@ -267,7 +275,8 @@
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMjM3MzYzNDgzOV5BMl5BanBnXkFtZTgwMjQwOTM4ODE@._V1_SY1000_CR0,0,1498,1000_AL_.jpg",
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMjQwODAyNjk0NF5BMl5BanBnXkFtZTgwODU4MzMyODE@._V1_SY1000_CR0,0,1500,1000_AL_.jpg"
       ],
-      "Trailer": "https://youtu.be/LpYpn2Bx2Ug?si=Ua12zqhoWaGFRz1L"
+      "Trailer": "https://youtu.be/LpYpn2Bx2Ug?si=Ua12zqhoWaGFRz1L",
+      "TrailerDuration": "225"
     },
     {
       "Title": "Power",
@@ -298,7 +307,8 @@
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMTQ4Mzk1ODcxM15BMl5BanBnXkFtZTgwNDQyODA5NTE@._V1_SY1000_SX1500_AL_.jpg",
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMTUwNTE0NDI1M15BMl5BanBnXkFtZTgwMDQyODA5NTE@._V1_SY1000_SX1500_AL_.jpg"
       ],
-      "Trailer": "https://youtu.be/WXTNngJsBrI?si=2ep8nvYWms_E8ZEF"
+      "Trailer": "https://youtu.be/WXTNngJsBrI?si=2ep8nvYWms_E8ZEF",
+      "TrailerDuration": "110"
     },
     {
       "Title": "Narcos",
@@ -329,7 +339,8 @@
         "https://images-na.ssl-images-amazon.com/images/M/MV5BODA1NjAyMTQ3Ml5BMl5BanBnXkFtZTgwNjI1Mzc3OTE@._V1_SY1000_CR0,0,1499,1000_AL_.jpg",
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMTU0NzQ0OTAwNl5BMl5BanBnXkFtZTgwMDAyMzA1OTE@._V1_SX1500_CR0,0,1500,999_AL_.jpg"
       ],
-      "Trailer": "https://youtu.be/xl8zdCY-abw?si=MtC3neoHpRwr45sH"
+      "Trailer": "https://youtu.be/xl8zdCY-abw?si=MtC3neoHpRwr45sH",
+      "TrailerDuration": "127"
     },
     {
       "Title": "Breaking Bad",
@@ -360,7 +371,8 @@
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMTAzMTczMjM3NjFeQTJeQWpwZ15BbWU4MDc1MTI1MzAx._V1_SY1000_CR0,0,1495,1000_AL_.jpg",
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMjA5MTE3MTgwMF5BMl5BanBnXkFtZTgwOTQxMjUzMDE@._V1_SX1500_CR0,0,1500,999_AL_.jpg"
       ],
-      "Trailer": "https://youtu.be/1JLUn2DFW4w?si=UCa1ssoatIXwF6jH"
+      "Trailer": "https://youtu.be/1JLUn2DFW4w?si=UCa1ssoatIXwF6jH",
+      "TrailerDuration": "136"
     },
     {
       "ComingSoon": true,
@@ -389,7 +401,8 @@
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMTgxNTAyNTU0NV5BMl5BanBnXkFtZTgwNzMzMDY3OTE@._V1_.jpg",
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMjE5NDc5NzUwNV5BMl5BanBnXkFtZTgwMDM3MDM2NzE@._V1_.jpg"
       ],
-      "Trailer": "https://youtu.be/aWzlQ2N6qqg?si=f7NK89y50UfOSgUk"
+      "Trailer": "https://youtu.be/aWzlQ2N6qqg?si=f7NK89y50UfOSgUk",
+      "TrailerDuration": "136"
     },
     {
       "ComingSoon": true,
@@ -420,7 +433,8 @@
         "https://images-na.ssl-images-amazon.com/images/M/MV5BNjM4MzExNDAyNl5BMl5BanBnXkFtZTgwOTAxMTc1ODE@._V1_SX1777_CR0,0,1777,744_AL_.jpg",
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMjE3NTgxMDcyNV5BMl5BanBnXkFtZTgwMDExMTc1ODE@._V1_SX1777_CR0,0,1777,744_AL_.jpg"
       ],
-      "Trailer": "https://youtu.be/frdj1zb9sMY?si=3xMcrIvtmmZqUWgf"
+      "Trailer": "https://youtu.be/frdj1zb9sMY?si=3xMcrIvtmmZqUWgf",
+      "TrailerDuration": "135"
     },
     {
       "ComingSoon": true,
@@ -450,7 +464,8 @@
         "https://images-na.ssl-images-amazon.com/images/M/MV5BZTY5ZGUxMTAtYTU0OC00NGQ2LTkzNzgtZGZmNjlmNjY3MGU0XkEyXkFqcGdeQXVyNTY0MTkxMTg@._V1_SY1000_CR0,0,1500,1000_AL_.jpg",
         "https://images-na.ssl-images-amazon.com/images/M/MV5BZjA0MWYwZTEtYzc5Yi00NGM2LTg1YTctNjY2YzQ0NDJhZDAwXkEyXkFqcGdeQXVyNDAyODU1Njc@._V1_SY1000_CR0,0,1499,1000_AL_.jpg"
       ],
-      "Trailer": "https://youtu.be/xLBZ1_J1xvM?si=AOt4Iq1zFREHG7gR"
+      "Trailer": "https://youtu.be/xLBZ1_J1xvM?si=AOt4Iq1zFREHG7gR",
+      "TrailerDuration": "129"
     },
     {
       "ComingSoon": true,
@@ -482,6 +497,7 @@
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMTgxMjA3MTQ5Ml5BMl5BanBnXkFtZTgwOTA1NDU4OTE@._V1_SY1000_CR0,0,1498,1000_AL_.jpg",
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMjMyNjg5ODYwNF5BMl5BanBnXkFtZTgwMTE1NDU4OTE@._V1_SY1000_CR0,0,1477,1000_AL_.jpg"
       ],
-      "Trailer": "https://youtu.be/ORa4hPhGrpo?si=aiUgC_3_oGi0kct0"
+      "Trailer": "https://youtu.be/ORa4hPhGrpo?si=aiUgC_3_oGi0kct0",
+      "TrailerDuration": "154"
     }
   ]

@@ -1,0 +1,93 @@
+[
+    {
+      "type": "multiple-choice",
+      "question": "Which movie won the Oscar for Best Picture in 2020?",
+      "options": ["Joker", "Parasite", "1917", "Once Upon a Time in Hollywood"],
+      "correctAnswer": "Parasite"
+    },
+    {
+      "type": "multiple-choice",
+      "question": "Which actor played the role of the Joker in the 2019 film 'Joker'?",
+      "options": ["Jared Leto", "Heath Ledger", "Joaquin Phoenix", "Christian Bale"],
+      "correctAnswer": "Joaquin Phoenix"
+    },
+    {
+      "type": "multiple-choice",
+      "question": "Which film did Leonardo DiCaprio win his first Oscar for Best Actor?",
+      "options": ["Titanic", "Inception", "The Revenant", "The Wolf of Wall Street"],
+      "correctAnswer": "The Revenant"
+    },
+    {
+      "type": "multiple-choice",
+      "question": "Which Marvel movie features the character Doctor Strange?",
+      "options": ["Guardians of the Galaxy", "Doctor Strange", "Thor: Ragnarok", "Ant-Man"],
+      "correctAnswer": "Doctor Strange"
+    },
+    {
+      "type": "multiple-choice",
+      "question": "Which film won the Academy Award for Best Animated Feature in 2017?",
+      "options": ["Frozen", "Coco", "Zootopia", "Moana"],
+      "correctAnswer": "Coco"
+    },
+    {
+      "type": "multiple-choice",
+      "question": "Who directed the movie 'Inception'?",
+      "options": ["Steven Spielberg", "Christopher Nolan", "Martin Scorsese", "Quentin Tarantino"],
+      "correctAnswer": "Christopher Nolan"
+    },
+    {
+      "type": "multiple-choice",
+      "question": "Which actor portrayed Tony Stark (Iron Man) in the Marvel Cinematic Universe?",
+      "options": ["Chris Hemsworth", "Chris Evans", "Mark Ruffalo", "Robert Downey Jr."],
+      "correctAnswer": "Robert Downey Jr."
+    },
+    {
+      "type": "multiple-choice",
+      "question": "What is the name of the fictional country in the movie 'Black Panther'?",
+      "options": ["Wakanda", "Genovia", "Zamunda", "Elbonia"],
+      "correctAnswer": "Wakanda"
+    },
+    {
+      "type": "multiple-choice",
+      "question": "Which 1994 movie is famous for the quote 'Life is like a box of chocolates'?",
+      "options": ["The Shawshank Redemption", "Forrest Gump", "The Godfather", "Pulp Fiction"],
+      "correctAnswer": "Forrest Gump"
+    },
+    {
+      "type": "multiple-choice",
+      "question": "What year was the movie 'The Matrix' released?",
+      "options": ["1995", "1997", "1999", "2001"],
+      "correctAnswer": "1999"
+    },
+    {
+      "type": "multiple-choice",
+      "question": "Who played the character of Jack Dawson in 'Titanic'?",
+      "options": ["Brad Pitt", "Leonardo DiCaprio", "Matt Damon", "Johnny Depp"],
+      "correctAnswer": "Leonardo DiCaprio"
+    },
+    {
+      "type": "multiple-choice",
+      "question": "Which movie features the famous quote 'Here's looking at you, kid'?",
+      "options": ["Casablanca", "The Godfather", "Gone with the Wind", "Citizen Kane"],
+      "correctAnswer": "Casablanca"
+    },
+    {
+      "type": "multiple-choice",
+      "question": "In which movie does the character 'Hannibal Lecter' appear?",
+      "options": ["The Godfather", "Silence of the Lambs", "Pulp Fiction", "Seven"],
+      "correctAnswer": "Silence of the Lambs"
+    },
+    {
+      "type": "multiple-choice",
+      "question": "Which actor starred in the movie 'The Pursuit of Happyness'?",
+      "options": ["Denzel Washington", "Will Smith", "Chris Rock", "Jamie Foxx"],
+      "correctAnswer": "Will Smith"
+    },
+    {
+      "type": "multiple-choice",
+      "question": "Which animated movie features a character named 'Shrek'?",
+      "options": ["Finding Nemo", "Shrek", "Monsters, Inc.", "Toy Story"],
+      "correctAnswer": "Shrek"
+    }
+  ]
+  

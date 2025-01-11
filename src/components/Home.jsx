@@ -131,10 +131,11 @@ const Home = ({theme, currentTheme}) => {
                     </select>
                 </div>
                 <div className='bar-title' style={{ borderBottom: `${theme === 'light' ? '#ccc' : '#444'}` }}>
-                <h2 class="watched-movies-title">Watched Movies</h2><IoChevronForwardSharp size={35} style={{ color: '#fff' }} />
+                <h2 class="watched-movies-title">Continue Watching</h2><IoChevronForwardSharp size={35} style={{ color: '#fff' }} />
                 </div>
+                {/* add continue watching with progress bar */}
                 <div className='home-user-watches'>
-                {shuffleArray(movies).map((movie, index) => (
+                {movies.map((movie, index) => (
                     <React.Fragment key={index}>
                         <MovieCard
                             movie = {movie}
@@ -146,6 +147,8 @@ const Home = ({theme, currentTheme}) => {
                             currentTheme={currentTheme}
                             movieTrailer={movie.Trailer}
                             addMovieToRecentlyWatched={addMovieToRecentlyWatched}
+                            duration={movie.TrailerDuration}
+                            showProgressBar={true} 
                         />
                     </React.Fragment>
                 ))}
@@ -166,6 +169,8 @@ const Home = ({theme, currentTheme}) => {
                             currentTheme={currentTheme}
                             movieTrailer={movie.Trailer}
                             addMovieToRecentlyWatched={addMovieToRecentlyWatched}
+                            duration={movie.TrailerDuration}
+                            showProgressBar={false} 
                         />
                     </React.Fragment>
                 ))) : <p>Keep watching to display your movies.</p>}
@@ -187,6 +192,8 @@ const Home = ({theme, currentTheme}) => {
                             movieTrailer={movie.Trailer}
                             rating={movie.imdbRating}
                             addMovieToRecentlyWatched={addMovieToRecentlyWatched}
+                            duration={movie.TrailerDuration}
+                            showProgressBar={false} 
                         />
                     </React.Fragment>
                 ))}

@@ -11,6 +11,7 @@ const CarouselComponent = ({ slides, autoPlay, interval, infiniteLoop }) => {
         interval={interval || 5000}
         emulateTouch={true}
         dynamicHeight={false}
+        showThumbs={false}
     >
       {slides.map((slide, index) => (
         <div key={index} className="video-slide" style={{ pointerEvents: 'none' }}>

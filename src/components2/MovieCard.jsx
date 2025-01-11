@@ -6,8 +6,11 @@ import { IoClose } from "react-icons/io5";
 import { IoHeartCircleOutline, IoCheckmarkCircleOutline, IoCaretForwardCircleOutline, IoAddCircleOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import Rating from '@mui/material/Rating';  
+//progress bar
+import ProgressBar from "./ProgressbarComponent";
 
-const MovieCard = ({movieImage, movieTitle, actionText, onAction, theme, currentTheme, movie, movieTrailer, rating, addMovieToRecentlyWatched}) => {
+
+const MovieCard = ({movieImage, movieTitle, actionText, onAction, theme, currentTheme, movie, movieTrailer, rating, addMovieToRecentlyWatched, duration, showProgressBar}) => {
     const navigate = useNavigate();
     
     //add to compare
@@ -69,16 +72,24 @@ const MovieCard = ({movieImage, movieTitle, actionText, onAction, theme, current
         const storedMovies = localStorage.getItem("recently-watched");
         const recentlyWatched = storedMovies ? JSON.parse(storedMovies) : [];
         return recentlyWatched.some(rw => rw.Title === movie.Title) ? false : false;
-    });
+    }); 
     
     
     const handleModalOpen = () => {
         setIsModalOpen(true);
     };
 
+    const [playedSeconds, setPlayedSeconds] = useState(0);
+
+    const handleProgress = (progress) => {
+        if (progress && progress.playedSeconds !== undefined) {
+            setPlayedSeconds(progress.playedSeconds);
+        }
+    };
+
     const handleModalClose = () => {
-        setIsModalOpen(false);
         addMovieToRecentlyWatched(movie);
+        setIsModalOpen(false);
     }
 
     const redirectToCompare = () => navigate("/compare");
@@ -101,6 +112,10 @@ const MovieCard = ({movieImage, movieTitle, actionText, onAction, theme, current
                         checked={isAdded}
                         onChange={handleCompare} />
                         <img src={movieImage} alt={movieTitle} />
+                        {/* progress bar */}
+                        {showProgressBar && ( 
+                            <ProgressBar playedSeconds={playedSeconds} duration={duration} />
+                        )}
                         <Typography variant="h5" component="h3" sx={{ 
                             textAlign: 'left', 
                             marginTop: '3px', 
@@ -228,6 +243,7 @@ const MovieCard = ({movieImage, movieTitle, actionText, onAction, theme, current
                         url={movieTrailer}
                         playing
                         controls
+                        onProgress={handleProgress}
                         width="100%"
                         height="100%"
                         style={{

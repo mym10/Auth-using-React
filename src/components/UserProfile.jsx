@@ -5,10 +5,11 @@ import EditableAvatar from '../components2/AvatarModal';
 import Tooltip  from '../components2/TooltipComponent';
 import { SketchPicker } from "react-color";
 import CalendarComponent from '../components2/CalendarComponent'
+import QuizComponent from '../components2/QuizComponent'
 
 //icons
 import { IoArrowBack, IoToday } from "react-icons/io5";
-import { MdOutlineDevices, MdCottage } from "react-icons/md";
+import { MdOutlineDevices, MdCottage, MdQuiz } from "react-icons/md";
 import { CheckCircle } from '@mui/icons-material';
 import { MdDraw } from "react-icons/md";
 
@@ -60,6 +61,16 @@ const UserProfile = ({ theme, currentTheme, avatarProps, setAvatarProps, current
     const handleModalToggle = () => {
         setModalOpen(!modalOpen);
     };
+
+    const [quizOpen, setQuizOpen] = useState(false);
+
+    const handleQuizOpen = () => {
+        setQuizOpen(true);
+    }
+
+    const handleQuizClose = () => {
+        setQuizOpen(!quizOpen)
+    }
 
   return (
     <div className='profile-page'>
@@ -148,8 +159,16 @@ const UserProfile = ({ theme, currentTheme, avatarProps, setAvatarProps, current
                         ))}
                     </div>
                 </div>
+                <div className='quiz'><Link to="#" className="text-xl flex items-center title" style={{ gap: '10px', color: currentTheme.color }} onClick={handleQuizOpen}>
+                <MdQuiz size={'25px'} className='icon' />
+                Take a Quiz</Link></div>
             </div>
         </div>
+
+        {quizOpen && (
+            <QuizComponent open={quizOpen} onClose={handleQuizClose} />
+        )}
+
         {modalOpen && (
             <CalendarComponent
                 open={modalOpen}
