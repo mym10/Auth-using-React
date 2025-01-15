@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import questionsData from '../questionsData.json';
+import questionsData from '../static/questionsData.json';
 import Confetti from 'react-confetti';
 
 const QuizComponent = ({ open, onClose }) => {
@@ -30,7 +30,6 @@ const QuizComponent = ({ open, onClose }) => {
   };
 
   useEffect(() => {
-    // Reset quiz when it's opened
     setCurrentQuestionIndex(0);
     setScore(0);
     setIsQuizEnded(false);

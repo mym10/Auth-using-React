@@ -12,6 +12,7 @@ import { IoArrowBack, IoToday } from "react-icons/io5";
 import { MdOutlineDevices, MdCottage, MdQuiz } from "react-icons/md";
 import { CheckCircle } from '@mui/icons-material';
 import { MdDraw } from "react-icons/md";
+import { IoMdAnalytics } from "react-icons/io";
 
 
 const UserProfile = ({ theme, currentTheme, avatarProps, setAvatarProps, currentUser, currentEmail }) => {
@@ -91,6 +92,9 @@ const UserProfile = ({ theme, currentTheme, avatarProps, setAvatarProps, current
                 <Link to="#" className="text-xl flex items-center title" style={{ gap: '10px', color: currentTheme.color }} onClick={handleAction}>
                 <IoToday size={'25px'} className='icon' />
                 Calender</Link>
+                <Link to="/analytics" className="text-xl flex items-center title" style={{ gap: '10px', color: currentTheme.color }}>
+                <IoMdAnalytics size={'25px'} className='icon' />
+                Analytics</Link>
             </div> 
             <button className="login-button" onClick={handleLogout}>
                 Logout

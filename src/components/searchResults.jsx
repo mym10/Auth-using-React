@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import MovieCard from '../components2/MovieCard';
-import movies from '../movies.json';
+import movies from '../static/movies.json';
 import MovieModal from '../components2/MovieModal';
 
 const SearchResults = ({theme, currentTheme}) => {

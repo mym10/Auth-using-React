@@ -19,6 +19,7 @@ import HomeSkeleton from '../components2/Skeletons/HomeSkeleton';
 import FavouritesSkeleton from '../components2/Skeletons/FavouritesSkeleton';
 import SearchResultsSkeleton from '../components2/Skeletons/SearchResultsSkeleton';
 import CompareSkeleton from '../components2/Skeletons/CompareSkeleton';
+import MovieAnalytics from "./Analytics";
 
 
 const App = () => {
@@ -157,7 +158,7 @@ const App = () => {
                 </>
               }
             />
-            <Route path="/home" element={<Home theme={theme} currentTheme={currentTheme}/>} />
+            <Route path="/home" element={<Home theme={theme} currentTheme={currentTheme} currentUser={currentUser}/>} />
             <Route path="/favourites" element={<Favourites theme={theme} currentTheme={currentTheme}/>} />
             <Route path="/watchlater" element={<WatchLater theme={theme} currentTheme={currentTheme}/>} />
             <Route path="/contact" element={<Contact currentTheme={currentTheme}/>} />
@@ -165,6 +166,7 @@ const App = () => {
             <Route path="/search" element={<SearchResults theme={theme} currentTheme={currentTheme}/>} />
             <Route path="/userprofile" element={<UserProfile theme={theme} currentTheme={currentTheme} avatarProps={avatarProps} setAvatarProps={updateAvatarProps} currentUser={currentUser} currentEmail={currentEmail}/>}/>
             <Route path="/compare" element={<Compare theme={theme} currentTheme={currentTheme}/>}/>
+            <Route path="/analytics" element={<MovieAnalytics/>}></Route>
           </Routes>
         )}
       </div>

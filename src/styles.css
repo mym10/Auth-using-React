@@ -54,7 +54,7 @@ h1 {
   padding-bottom: 15px; 
 }
 
-h1::after {
+/* h1::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -63,7 +63,7 @@ h1::after {
   width: 4rem; 
   height: 4px; 
   background-color: #845ec2; 
-}
+} */
 
 .password-strength.strong {
   color: green !important;
@@ -193,6 +193,39 @@ h1::after {
   color: #fff !important;
 }
 
+.comment-section {
+  margin: 10px;
+  margin-top: 20px;
+  border: 2px solid #545e6e;
+  border-radius: 10px;
+  padding: 10px;
+  
+} 
+
+.comment {
+  margin-bottom: 10px;
+  padding: 10px;
+  padding-left: 30px;
+  border-radius: 5px;
+}
+
+.comment p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.comment p strong {
+  color: #B3ABE7;
+}
+
+.add-comment {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding-left: 30px;
+}
+
 
 /* Dropdown Styling */
 .dropdown-container {
@@ -310,17 +343,83 @@ h1::after {
   z-index: 1;
 }
 
-
 .home-page-content {
   position: relative;  
   z-index: 1;
   padding-top: 70vh; 
 } 
 
-.bar-title{
+.bar-title {
   display: flex;
-  flex-direction: row;
-  padding-top: 20px
+  align-items: center; 
+  justify-content: space-between; 
+  padding-top: 10px;
+  padding-left: 10px;
+  border-bottom: 1px solid;
+}
+
+.watched-movies-title {
+  margin: 0; 
+}
+
+.pagination-container {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-right: 40px;
+}
+
+.pagination-btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-btn:disabled {
+  cursor: not-allowed;
+}
+
+.pagination-number {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  background: none;
+  color: #ac7ff5;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.pagination-number.active {
+  color: #fff;
+  font-weight: bold;
+}
+
+.pagination-number.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: white;
+  border-radius: 2px;
+}
+
+.pagination-number:hover {
+  color: #fff;
 }
 
 /*contact page*/
@@ -893,4 +992,162 @@ h2 {
 
 .quiz-result button:hover {
   background-color: #e53935;
+}
+
+/* MOVIE ANALYTICS */
+
+.dashboard-title{
+  font-size: 2.8rem;
+  color: white;
+  text-align: left;
+  margin-left: 20px;
+  margin-top: 70px;
+  padding-bottom: 0px;
+}
+
+.analytics-container {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+
+/* STATS */
+.stats-container {
+  grid-column: span 2; 
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.stats-container .box-1,
+.stats-container .box-2,
+.stats-container .box-3,
+.stats-container .box-4 {
+  border: 2px solid #545e6e;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stats-container .box-4 {
+  align-items:start;
+}
+
+.stats-container h3 {
+  font-size: 1.2rem;
+}
+
+.stats-container h4 {
+  font-size: 1.7rem;
+  font-weight: bold;
+}
+
+.stats-container p {
+  color: #545e6e;
+}
+
+.stats-container button {
+    margin: 10px;
+    margin-left: 0px;
+    padding: 10px 15px;
+    background-color: #785CB3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.stats-container button:hover {
+    background-color: #502891;
+}
+
+
+/* BAR GRAPH */
+.bargraph-container {
+  grid-column: span 1;
+  align-items: center;
+  border: 2px solid #545e6e;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.bargraph-container h2 {
+  margin-bottom: 20px;
+}
+
+/* PIE CHART */
+.piechart-container {
+  grid-column: span 1; 
+  align-items: center;
+  border: 2px solid #545e6e;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.piechart-container h2 {
+  margin-bottom: 20px;
+}
+
+/* LINE GRAPH */
+.linechart-container {
+  grid-column: span 2;
+  align-items: center;
+  border: 2px solid #545e6e;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  margin-top: 0px;
+}
+
+.line-container {
+  display: flex;
+  gap: 10px;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.linegraph-container h2 {
+  margin-bottom: 20px;
+}
+
+.y-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 300px;
+  padding-right: 10px;
+}
+
+.y-axis span {
+  color: #fff;
+}
+
+.line-box {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: 100%;
+  width: 100%;
+}
+
+.lines {
+  height: 300px;
+  position: relative;
+}
+
+.lines svg {
+  width: 100%;
+  height: 100%;
+}
+
+.hor-axis {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  padding-top: 10px;
 }

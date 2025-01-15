@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MovieCard from '../components2/MovieCard';
-import movies from '../movies.json';
+import movies from '../static/movies.json';
 import MovieModal from '../components2/MovieModal';
-import { IoChevronForwardSharp, IoChatbubbleSharp } from "react-icons/io5";
+import { IoChatbubbleSharp } from "react-icons/io5";
 import CarouselComponent from '../components2/CarouselComponent';
 import Fab from '@mui/material/Fab';
 import ChatDrawer from '../components2/ChatbotComponent';
+import Pagination from '../components2/Pagination';
+import CommentSection from '../components2/CommentSection';
 
-const Home = ({theme, currentTheme}) => {
+const Home = ({theme, currentTheme, currentUser}) => {
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [drawerOpen, setDrawerOpen] = useState(false);
@@ -27,14 +29,14 @@ const Home = ({theme, currentTheme}) => {
         : 'linear-gradient(to bottom, rgba(255, 255, 255, 0) 60%, #DDE9F3 100%)';
 
     //optional------------------
-    const shuffleArray = (array) => {
-        let shuffledArray = [...array]; 
-        for (let i = shuffledArray.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1)); 
-          [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]]; 
-        }
-        return shuffledArray;
-      };
+    // const shuffleArray = (array) => {
+    //     let shuffledArray = [...array]; 
+    //     for (let i = shuffledArray.length - 1; i > 0; i--) {
+    //       const j = Math.floor(Math.random() * (i + 1)); 
+    //       [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]]; 
+    //     }
+    //     return shuffledArray;
+    // };
 
     //trending movies based on the descending order of imdbRating
     const desIMDB = (array) => {
@@ -90,6 +92,47 @@ const Home = ({theme, currentTheme}) => {
         }
     };
 
+    //pagination
+    const itemsPerPage = 5;
+
+    const [currentPageMovies, setCurrentPageMovies] = useState(1);
+    const [currentPageRecentlyWatched, setCurrentPageRecentlyWatched] = useState(1);
+    const [currentPageTrending, setCurrentPageTrending] = useState(1);
+
+    const handleMoviesPageChange = (page) => {
+        setCurrentPageMovies(page);
+    };
+    
+    const handleRecentlyWatchedPageChange = (page) => {
+        setCurrentPageRecentlyWatched(page);
+    };
+    
+    const handleTrendingPageChange = (page) => {
+        setCurrentPageTrending(page);
+    };
+    
+    const paginatedMovies = movies.slice(
+        (currentPageMovies - 1) * itemsPerPage,
+        currentPageMovies * itemsPerPage
+    );
+    
+    const paginatedrwMovies = recentlyWatchedMovies.slice(
+        (currentPageRecentlyWatched - 1) * itemsPerPage,
+        currentPageRecentlyWatched * itemsPerPage
+    );
+    
+    const paginatedraMovies = desIMDB(movies).slice(
+        (currentPageTrending - 1) * itemsPerPage,
+        currentPageTrending * itemsPerPage
+    );
+
+    //accodion for comments
+    const [isCommentsVisible, setIsCommentsVisible] = useState(false);
+
+    const toggleComments = () => {
+        setIsCommentsVisible(!isCommentsVisible);
+    };
+
     return (
         <div className='home-page' style={{backgroundColor: currentTheme.background, color: currentTheme.color}}>
             <div className="carousel-container">
@@ -131,11 +174,10 @@ const Home = ({theme, currentTheme}) => {
                     </select>
                 </div>
                 <div className='bar-title' style={{ borderBottom: `${theme === 'light' ? '#ccc' : '#444'}` }}>
-                <h2 class="watched-movies-title">Continue Watching</h2><IoChevronForwardSharp size={35} style={{ color: '#fff' }} />
+                <h2 class="watched-movies-title">Continue Watching</h2>
                 </div>
-                {/* add continue watching with progress bar */}
                 <div className='home-user-watches'>
-                {movies.map((movie, index) => (
+                {paginatedMovies.map((movie, index) => (
                     <React.Fragment key={index}>
                         <MovieCard
                             movie = {movie}
@@ -153,11 +195,18 @@ const Home = ({theme, currentTheme}) => {
                     </React.Fragment>
                 ))}
                 </div>
+                <div className='pagination-container'>
+                <Pagination
+                    totalItems={movies.length}
+                    itemsPerPage={itemsPerPage}
+                    currentPage={currentPageMovies}
+                    onPageChange={handleMoviesPageChange}
+                /></div>
                 <div className='bar-title' style={{ borderBottom: ` ${theme === 'light' ? '#ccc' : '#444'}` }}>
-                <h2>Recently Watched Movies</h2><IoChevronForwardSharp size={35} style={{ color: theme === 'light' ? '#000' : 'lightgray', cursor: 'pointer' }}/>
+                <h2>Recently Watched Movies</h2>
                 </div>
                 <div className='recently-watched'>
-                {recentlyWatchedMovies.length > 1 ? (recentlyWatchedMovies.map((movie, index) => (
+                {recentlyWatchedMovies.length > 1 ? (paginatedrwMovies.map((movie, index) => (
                     <React.Fragment key={index}>
                         <MovieCard
                             movie = {movie}
@@ -175,11 +224,18 @@ const Home = ({theme, currentTheme}) => {
                     </React.Fragment>
                 ))) : <p>Keep watching to display your movies.</p>}
                 </div>
+                <div className='pagination-container'>
+                <Pagination
+                    totalItems={recentlyWatchedMovies.length}
+                    itemsPerPage={itemsPerPage}
+                    currentPage={currentPageRecentlyWatched}
+                    onPageChange={handleRecentlyWatchedPageChange}
+                /></div>
                 <div className='bar-title' style={{ borderBottom: `${theme === 'light' ? '#ccc' : '#444'}` }}>
-                <h2>Trending in India</h2><IoChevronForwardSharp size={35} style={{ color: theme === 'light' ? '#000' : 'lightgray', cursor: 'pointer' }}/>
+                <h2>Trending in India</h2>
                 </div>
                 <div className='trending-movies'>
-                {desIMDB(movies).map((movie, index) => (
+                {paginatedraMovies.map((movie, index) => (
                     <React.Fragment key={index}>
                         <MovieCard
                             movie = {movie}
@@ -198,6 +254,36 @@ const Home = ({theme, currentTheme}) => {
                     </React.Fragment>
                 ))}
                 </div>
+                <div className='pagination-container' style={{marginBottom: '20px'}}>
+                <Pagination
+                    totalItems={movies.length}
+                    itemsPerPage={itemsPerPage}
+                    currentPage={currentPageTrending}
+                    onPageChange={handleTrendingPageChange}
+                /></div>
+                <div className="accordion">
+                <button
+                    onClick={toggleComments}
+                    style={{
+                        padding: '15px',
+                        textAlign: 'left',
+                        backgroundColor: '#333',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: '5px',
+                        fontSize: '1rem',
+                        cursor: 'pointer',
+                        margin:'20px',
+                    }}
+                >
+                    {isCommentsVisible ? 'Hide Comments' : 'Show Comments'}
+                </button>
+                {isCommentsVisible && (
+                    <div className="accordion-content" style={{ marginTop: '10px' }}>
+                        <CommentSection currentUser={currentUser}/>
+                    </div>
+                )}
+            </div>
             </div>
             {selectedMovie && (
                 <MovieModal

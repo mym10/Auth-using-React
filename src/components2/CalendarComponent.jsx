@@ -3,7 +3,7 @@ import { Dialog } from '@mui/material';
 import { Calendar } from 'react-calendar';
 import { IoClose } from 'react-icons/io5';
 import 'react-calendar/dist/Calendar.css';
-import movies from '../movies.json';
+import movies from '../static/movies.json';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 
